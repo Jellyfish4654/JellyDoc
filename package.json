@@ -12,7 +12,7 @@
     "url": "git+https://github.com/Jellyfish4654/JellyDocs"
   },
   "dependencies": {
-    "next": "^13.0.6",
+    "next": "^13.4.19",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",

@@ -1,0 +1,34 @@
+# Motors Initialization
+
+The first step in using a motor is to initialize the motor as a variable through hardwareMap in BaseOpMode.
+
+```java
+DcMotor testMotor;       
+testMotor = hardwareMap.get(DcMotor.class, "testMotor");  
+```
+
+# Setting Motor Direction
+
+`setDirection` adjusts the rotation direction of drive train motors to ensure the wheels spin in the same direction when powered
+
+```java
+testMotor1.setDirection(DcMotor.Direction.Forward);
+testMotor2.setDirection(DcMotor.Direction.Reverse);
+```
+
+# Setting Motor Power
+
+The `setPower` method controls the motor's power, accepting values between -1 and 1.
+
+```java
+testMotor.setPower(0.75);
+```
+
+# Motor Encoder
+
+Motor encoders use *ticks* to measure motor rotation. Use the `DcMotorEx` class, similar to DcMotor but with added methods. Access ticks through the `getCurrentPosition` method.
+
+```java
+int position;
+position = testMotor.getCurrentPosition();
+```
