@@ -3,7 +3,6 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
   latex: true,
   staticImage: true,
-  basePath: `JellyDocs`,
   flexsearch: {
     codeblocks: false
   },
@@ -13,5 +12,6 @@ const withNextra = require('nextra')({
 module.exports = withNextra({
   images: {
     unoptimized: true
-  }
+  },
+  basePath: `JellyDocs`,
 });
