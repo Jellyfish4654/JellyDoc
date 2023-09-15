@@ -7,6 +7,11 @@ const config: DocsThemeConfig = {
   footer: {
     text: ' ',
   },
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – JellyDocs'
+    }
+  }
 }
 
 export default config
