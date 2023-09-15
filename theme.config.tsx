@@ -3,7 +3,7 @@ import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
   logo: <span>JellyDocs</span>,
-  docsRepositoryBase: 'https://github.com/Jellyfish4654/JellyDocs',
+  docsRepositoryBase: 'https://github.com/Jellyfish4654/JellyDocs/tree/main/JellyDocs',
   footer: {
     text: ' ',
   },

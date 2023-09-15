@@ -1,7 +1,10 @@
 {
-    "Getting-Started": "Getting Started",
+    "GettingStarted": "Getting Started",
     "OpMode": "OpMode",
     "BaseOpMode": "BaseOpMode",
     "Motors": "Motors",
-    "Servos": "Servos"
+    "Servos": "Servos",
+    "Gamepad": "Gamepad",
+    "MecanumPhysics": "Mecanum Physics",
+    "TeleOp": "TeleOp"
 }

@@ -1,0 +1,62 @@
+# Gamepad
+
+| Modifier | Field              | Description                                                 |
+|----------|--------------------|-------------------------------------------------------------|
+| boolean  | x                  | button x                                                    |
+| boolean  | a                  | button a                                                    |
+| boolean  | b                  | button b                                                    |
+| boolean  | y                  | button y                                                    |
+| boolean  | dpad_down          | dpad down                                                   |
+| boolean  | dpad_left          | dpad left                                                   |
+| boolean  | dpad_right         | dpad right                                                  |
+| boolean  | dpad_up            | dpad up                                                     |
+| boolean  | left_bumper        | button left bumper                                          |
+| boolean  | right_bumper       | button right bumper                                         |
+| boolean  | start              | button start                                                |
+| boolean  | back               | button back                                                 |
+| boolean  | guide              | button guide - large button in the middle of the controller |
+| boolean  | right_stick_button | right stick button                                          |
+| boolean  | left_stick_button  | left stick button                                           |
+| float    | left_stick_x       | left analog stick horizontal axis                           |
+| float    | left_stick_y       | left analog stick vertical axis                             |
+| float    | right_stick_x      | right analog stick horizontal axis                          |
+| float    | right_stick_y      | right analog stick vertical axis                            |
+| float    | left_trigger       | left trigger                                                |
+| float    | right_trigger      | right trigger                                               |
+
+# Rising Edge Detector
+
+The most commonly used technique is a rising edge detector. It allows code to be run only once upon the initial button press rather than continuously while the button is held down. It verifies the button was not pressed in the previous loop but is pressed currently.
+
+```java
+if (currentGamepad1.a && !previousGamepad1.a) {
+    servo.setPosition(servo.getPosition() + 0.1);
+}
+```
+
+# Toggles
+
+A common use case for rising edge detectors is to control toggles, enabling robots to switch between states with a button. Utilizing a rising edge detector facilitates state toggling by inversely setting a boolean, which then governs the corresponding action.
+
+```java
+public void runOpMode() throws InterruptedException {
+    //Initialization Code Goes Here
+    boolean intakeToggle = false;
+     waitForStart();
+     while (opModeIsActive()) {
+        // Rising edge detector
+        if (currentGamepad1.a && !previousGamepad1.a) {
+            // This will set intakeToggle to true if it was previously false
+            // and intakeToggle to false if it was previously true,
+            // providing a toggling behavior.
+            intakeToggle = !intakeToggle;
+        }
+        // Using the toggle variable to control the robot.
+        if (intakeToggle) {
+            intakeMotor.setPower(1);
+        } else {
+            intakeMotor.setPower(0);
+        }
+    }
+}
+```
