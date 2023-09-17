@@ -191,57 +191,52 @@ In FTC, subsystems comprise control elements like motors, servos, and sensors. T
 
 Develop a separate class for every mechanism and establish a method for each motion component. For example, this is the code for a claw:
 
-<Tabs items={['BaseOpMode class', 'Claw class', 'Method Usage']}>
+<Tabs items={['BaseOpMode Class', 'Claw Class', 'Method Usage']}>
   <Tabs.Tab>
     ```java
-public abstract class BaseOpMode extends LinearOpMode {
-    protected Claw claws;
-
-    protected void initHardware() {
-        Servo claw = hardwareMap.get(Servo.class, "servo");
-        claws = new Claw(claw);
+    public abstract class BaseOpMode extends LinearOpMode {
+        protected Claw claws;
+        
+        protected void initHardware() {
+            Servo claw = hardwareMap.get(Servo.class, "servo");
+            claws = new Claw(claw);
+        }
     }
-
-}
-```
-</Tabs.Tab>
-
-  <Tabs.Tab>
-    ```java
-public class Claw {
-    private Servo claw;
-
-    public Claw(Servo servo) {
-        this.claw = servo;
-    }
-
-    public void clawsOpen() {
-        claw.setPosition(1);
-    }
-
-    public void clawsClose() {
-        claw.setPosition(0);
-    }
-
-    public double getCurrentPosition() {
-        return claw.getPosition();
-    }
-
-}
-```
-
-</Tabs.Tab>
-  <Tabs.Tab>
-    ```java
-if (gamepad2.right_bumper) {
-    claws.clawsClose();
-}
-if (gamepad2.left_bumper) {
-    claws.clawsOpen();
-}
     ```
   </Tabs.Tab>
-</Tabs.Tab>
+  <Tabs.Tab>
+    ```java
+    public class Claw {
+        private Servo claw;
+        
+        public Claw(Servo servo) {
+            this.claw = servo;
+        }
+
+        public void clawsOpen() {
+            claw.setPosition(1);
+        }
+
+        public void clawsClose() {
+            claw.setPosition(0);
+        }
+
+        public double getCurrentPosition() {
+            return claw.getPosition();
+        }
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```java
+    if (gamepad2.right_bumper) {
+        claws.clawsClose();
+    }
+    if (gamepad2.left_bumper) {
+        claws.clawsOpen();
+    }
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 # Arms/Slides
