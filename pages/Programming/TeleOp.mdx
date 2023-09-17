@@ -1,5 +1,5 @@
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
+import { Callout } from "nextra/components";
+import { Tabs } from "nextra/components";
 
 # TeleOp
 
@@ -201,9 +201,11 @@ public abstract class BaseOpMode extends LinearOpMode {
         Servo claw = hardwareMap.get(Servo.class, "servo");
         claws = new Claw(claw);
     }
+
 }
-    ```
-  </Tabs.Tab>
+```
+</Tab>
+
   <Tabs.Tab>
     ```java
 public class Claw {
@@ -224,9 +226,10 @@ public class Claw {
     public double getCurrentPosition() {
         return claw.getPosition();
     }
+
 }
-    ```
-  </Tabs.Tab>
+```
+
 </Tabs>
   <Tabs.Tab>
     ```java
@@ -239,12 +242,19 @@ if (gamepad2.left_bumper) {
     ```
   </Tabs.Tab>
 </Tabs>
+</Tabs>
 
 # Arms/Slides
 
-Arms and slides are affected by gravity, so you will be forced to use a feedforward system. This video by KookyBotz showcases how to create and tune a feedforward system. 
+Arms and slides are affected by gravity, so you will be forced to use a feedforward system. This video by KookyBotz showcases how to create and tune a feedforward system.
 
-<iframe width="100%" height="500px" src="https://www.youtube.com/embed/E6H6Nqe6qJo" frameborder="6" allowfullscreen></iframe>
+<iframe
+  width="100%"
+  height="500px"
+  src="https://www.youtube.com/embed/E6H6Nqe6qJo"
+  frameborder="6"
+  allowfullscreen
+></iframe>
 
 # Filters
 
@@ -263,20 +273,21 @@ double a = 0.9;
 LowPassFilter filter = new LowPassFilter(a);
 while (true) {
     double currentValue = readNoisySensor();
-    double estimate = filter.estimate(currentValue); 
+    double estimate = filter.estimate(currentValue);
 }
 ```
+
 # Kalman Filter
 
 A Kalman filter at the highest level is an algorithm that optimally estimates any given state of a system
 
 ```java
-double Q = 0.3; 
-double R = 3; 
-int N = 3; 
+double Q = 0.3;
+double R = 3;
+int N = 3;
 KalmanFilter filter = new KalmanFilter(Q,R,N);
 while (true) {
-    double currentValue = readNoisySensor(); 
-    double estimate = filter.estimate(currentValue); 
+    double currentValue = readNoisySensor();
+    double estimate = filter.estimate(currentValue);
 }
 ```
