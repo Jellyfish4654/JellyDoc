@@ -44,8 +44,9 @@ const config: DocsThemeConfig = {
     toggleButton: true
   },
   toc: {
-    backToTop: true
-  }
+    float: true,
+    backToTop: true,
+  },
 }
 
 export default config
