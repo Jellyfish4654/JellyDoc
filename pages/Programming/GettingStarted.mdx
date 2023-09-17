@@ -1,36 +1,37 @@
-# Getting Started
+## Getting Started
 
 One of the most important goals of being on the programming team is to achieve the **Control Award**. Although you don’t advance at competitions from the Control Award, it has a direct impact on achieving the **Inspire Award**, which would allow you to automatically advance if you achieve 1st Inspire. The Control award is meant to recognize the team with the best or most innovative software and sensor solution for the game. Factors that influence the Control Award includes, sensor use, complex or unique algorithms, driver controlled enhancements, and a good autonomous. The reason we focus on things like control systems or sensors to increase reliability is to score well for the autonomous award.
 
 Additionally, programmers play a vital role in the team’s success. A good TeleOp and Auto can take a team with a mid build to become a top tier team. For instance, in PowerPlay, The Emerald Bots had a very basic design, however, they were able to achieve great success with their [1+5 auto](https://www.youtube.com/watch?v=N24eWfCMQiM). On the other hand, in Freight Frenzy, before we had a programming core, our TeleOp and Auto were pretty bad compared to our current’s standards. As a result, our team, which already had a flawed design, was even worse.
 
-# Android Studio
+## Android Studio
 
-Android Studio, the FTC standard, streamlines code compilation and facilitates library integration. Download the latest version at https://developer.android.com/studio   and follow the setup wizard, using the recommended development kits for optimal setup on the Control Hub.
+Android Studio, the FTC standard, streamlines code compilation and facilitates library integration. Download the latest version at https://developer.android.com/studio and follow the setup wizard, using the recommended development kits for optimal setup on the Control Hub.
 
-# FTC SDK
+## FTC SDK
 
 After downloading Android Studio, proceed to set up the SDK using the latest release from the FtcRobotController repository on GitHub. If a repository for the current season already exists, skip this step. Establish a repository on Jellyfish GitHub for the ongoing season post SDK installation.
 
-import { Callout } from 'nextra/components'
- 
+import { Callout } from "nextra/components";
+
 <Callout type="warning" emoji="⚠️">
   Ignore this step if there is already a repository for the season
-</Callout>
+</Callout>;
 
-# GitHub Desktop
+## GitHub Desktop
 
 Install [GitHub Desktop](https://desktop.github.com/) and clone the project from the repository . This will be used to pull and commit to GitHub.
 
-# Logcat
+## Logcat
 
 Logcat facilitates runtime code debugging and issue diagnosis. To use it, connect your device (or use ADB), then select the relevant app to view its logs.
 
-# Wireless Communication
+## Wireless Communication
 
-Android Debug Bridge (ADB) is a command-line tool that allows you to wirelessly compile to the Control Hub. ADB should already come with the platform tools in Android Studio. 
+Android Debug Bridge (ADB) is a command-line tool that allows you to wirelessly compile to the Control Hub. ADB should already come with the platform tools in Android Studio.
 
 To use it:
+
 1. Open a CLI (e.g., PowerShell or Command Prompt).
 2. Navigate to the platform-tools directory with: `cd AppData\Local\Android\Sdk\platform-tools` (skip if [ADB is added to PATH](https://www.youtube.com/watch?v=bIWe8RYs-dI)).
 3. Connect to the Control Hub's WiFi hotspot.

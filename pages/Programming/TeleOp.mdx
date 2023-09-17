@@ -5,11 +5,11 @@ import { Tabs } from "nextra/components";
 
 TeleOp, the driver-controlled phase, is divided into two roles: the primary driver, responsible for movement, and the secondary driver, overseeing intake. We maintain a consistent framework for our TeleOp annually but innovate with complex algorithms and driver enhancements to achieve the **Control Award**.
 
-# Primary Driver
+## Primary Driver
 
 The primary driver's role is to maneuver the robot. To facilitate this, the programmer should integrate driver enhancements into the TeleOp code, which will be segmented for better management.
 
-# Precision Mode
+### Precision Mode
 
 The precision method adjusts our robot's motor speeds with a multiplier, creating a mode for enhanced control. It also scales motor values to fit the FTC SDK range of -1 to 1.
 
@@ -54,7 +54,7 @@ switch (driveMode) {
 }
 ```
 
-# Drive Modes
+### Drive Modes
 
 Our driver enhancements feature selectable drive modes, catering to individual preferences. While its impact is subtle, it showcases our adaptability and flexibility in drivetrain configurations to judges.
 
@@ -137,7 +137,7 @@ public void runOpMode() throws InterruptedException {
 }
 ```
 
-# Field Centric
+### Field Centric
 
 In Field Centric Drive mode, the translation joystick allows the robot’s direction to be controlled relative to the field/driver rather than the robot’s frame. The code uses the Control Hub IMU to rotate the robot’s movement relative to its rotation. One issue with the IMU is that it can fail due to lag or other factors, so the code includes a failsafe that resets the IMU if necessary.
 
@@ -183,11 +183,11 @@ In Field Centric Drive mode, the translation joystick allows the robot’s direc
  }
 ```
 
-# Secondary Driver
+## Secondary Driver
 
 In FTC, subsystems comprise control elements like motors, servos, and sensors. The second driver controls specific robot subsystems. While mechanisms change each season, the underlying principle remains consistent. Create a class for each mechanism and a method for each motion component.
 
-# Claw
+### Claw
 
 Develop a separate class for every mechanism and establish a method for each motion component. For example, this is the code for a claw:
 
@@ -226,6 +226,7 @@ Develop a separate class for every mechanism and establish a method for each mot
         }
     }
     ```
+
   </Tabs.Tab>
   <Tabs.Tab>
     ```java
@@ -239,7 +240,7 @@ Develop a separate class for every mechanism and establish a method for each mot
   </Tabs.Tab>
 </Tabs>
 
-# Arms/Slides
+### Arms/Slides
 
 Arms and slides are affected by gravity, so you will be forced to use a feedforward system. This video by KookyBotz showcases how to create and tune a feedforward system.
 
@@ -251,7 +252,7 @@ Arms and slides are affected by gravity, so you will be forced to use a feedforw
   allowfullscreen
 ></iframe>
 
-# Filters
+## Filters
 
 Filters enhance sensor precision and accuracy by reducing noise levels. Additionally, filters are great to mention the Control Award. There are multiple libraries that will make it easy to implement filters.
 
@@ -259,7 +260,7 @@ Filters enhance sensor precision and accuracy by reducing noise levels. Addition
   Examples are taken from [CTRL ALT FTC](https://www.ctrlaltftc.com/)
 </Callout>
 
-# Low pass filter
+### Low pass filter
 
 The low pass filter is a basic algorithm that reduces noise levels by smoothing the values.
 
@@ -272,7 +273,7 @@ while (true) {
 }
 ```
 
-# Kalman Filter
+### Kalman Filter
 
 A Kalman filter at the highest level is an algorithm that optimally estimates any given state of a system
 

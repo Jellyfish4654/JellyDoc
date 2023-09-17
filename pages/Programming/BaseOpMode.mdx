@@ -1,8 +1,8 @@
-# BaseOpMode
+## BaseOpMode
 
 The BaseOpMode class is utilized by our team to manage our **hardwareMap**, an object that is used for the initialization of FTC Objects. The BaseOpMode class centralizes hardwareMap management for initializing FTC Objects, eliminating the need for individual OpMode mappings.
 
-````java filename="BaseOpMode class" 
+```java filename="BaseOpMode class"
 package org.firstinspires.ftc.teamcode.Framework;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -41,9 +41,9 @@ public abstract class BaseOpMode extends LinearOpMode {
         slides = new Slides(leftSlideMotor, rightSlideMotor);
     }
 }
-````
+```
 
-````java filename="Claw class" 
+```java filename="Claw class"
 package org.firstinspires.ftc.teamcode.Framework;
 
 import com.qualcomm.robotcore.hardware.Servo;
@@ -72,6 +72,6 @@ public class Claw {
         return claw.getPosition();
     }
 }
-````
+```
 
 Read the comments to understand how the initialization works.

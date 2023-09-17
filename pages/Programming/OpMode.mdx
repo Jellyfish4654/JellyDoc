@@ -1,30 +1,30 @@
-# Creating an OpMode
+## Creating an OpMode
 
 The LinearOpMode class in the FTC Robot Controller SDK facilitates the creation of autonomous operation modes, essentially instruction sets for your robot.
 
-# Important LinearOpMode Methods
+## Important LinearOpMode Methods
 
 - waitForStart() - Waits for Program to be started after initialization.
 - opModeIsActive() - Checks to see if the op-mode has been started, returns True or False.
 - runOpMode() - Contains all op-mode code, runs once after the start of the OpMode.
 
-# Other LinearOpMode Methods
+## Other LinearOpMode Methods
 
 - isStarted(): returns true if the START button has been pressed, otherwise it returns false.
 - isStopRequested(): returns true if the STOP button has been pressed, otherwise it returns false.
 - idle(): calls Thread.yield, allowing other threads at the same priority level to run.
 - opModeInInit(): returns !isStarted() && !isStopRequested() and does not call idle().
 
-# TeleOp LinearOpMode
+## TeleOp LinearOpMode
 
-```java 
+```java
 @TeleOp(name = "JellyTele")
 public class JellyTele extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
         //Initialization Code Goes Here
         waitForStart();
-        while(opModeIsActive()){ 
+        while(opModeIsActive()){
             //while loop for when program is active
             //Code repeated during teleop goes here
             //Analogous to loop() method in OpMode
@@ -34,7 +34,7 @@ public class JellyTele extends LinearOpMode{
 }
 ```
 
-# Auto LinearOpMode
+## Auto LinearOpMode
 
 ```java
 @Autonomous(name = "JellyAuto")
@@ -53,4 +53,6 @@ import { Callout } from 'nextra/components'
  
 <Callout type="info" emoji="💡">
   The LinearOpMode methods for auto can vary
-</Callout>
+</Callout
+
+>

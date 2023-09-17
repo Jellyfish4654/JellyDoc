@@ -1,7 +1,7 @@
-# Gamepad
+## Gamepad
 
 | Modifier | Field              | Description                                                 |
-|----------|--------------------|-------------------------------------------------------------|
+| -------- | ------------------ | ----------------------------------------------------------- |
 | boolean  | x                  | button x                                                    |
 | boolean  | a                  | button a                                                    |
 | boolean  | b                  | button b                                                    |
@@ -24,7 +24,7 @@
 | float    | left_trigger       | left trigger                                                |
 | float    | right_trigger      | right trigger                                               |
 
-# Rising Edge Detector
+## Rising Edge Detector
 
 The most commonly used technique is a rising edge detector. It allows code to be run only once upon the initial button press rather than continuously while the button is held down. It verifies the button was not pressed in the previous loop but is pressed currently.
 
@@ -34,7 +34,7 @@ if (currentGamepad1.a && !previousGamepad1.a) {
 }
 ```
 
-# Toggles
+## Toggles
 
 A common use case for rising edge detectors is to control toggles, enabling robots to switch between states with a button. Utilizing a rising edge detector facilitates state toggling by inversely setting a boolean, which then governs the corresponding action.
 

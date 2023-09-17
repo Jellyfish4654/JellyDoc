@@ -1,4 +1,8 @@
-# Servo Initialization
+## Servos
+
+Servos are used for fine-tuned and accurate movement. To configure a servo, utilize the designated servo programmer. I strongly recommend choosing Axon Servos for a cost-effective yet high-performance solution. Their software-based programmer significantly outperforms the infuriating motherboard + button setup found in Rev and GoBilda offerings, delivering greater power with ease of use.
+
+### Servo Initialization
 
 Just like for Motors, servos are initialized through the hardwareMap object.
 
@@ -7,7 +11,7 @@ Servo testServo;
 testServo = hardwareMap.get(Servo.class, "testServo");
 ```
 
-# Setting Servo Position
+### Setting Servo Position
 
 The setPosition method accepts a double value between 0 and 1 to set a specified position on non-CR servos.
 
@@ -15,11 +19,11 @@ The setPosition method accepts a double value between 0 and 1 to set a specified
 testServo.setPosition(0.5);
 ```
 
-# CR Servos
+## CR Servos
 
 CR Servos (Continuous Rotation Servos) are a mode for servos where the servo continuously rotates, similar to the movement of a motor.
 
-# CR Servo Initialization
+### CR Servo Initialization
 
 CR Servos have a slightly different initialization:
 
@@ -28,7 +32,7 @@ CRservo testCRServo;
 testCRServo = hardwareMap.get(CRServo.class, "testCRServo");
 ```
 
-# Setting CR Servo Powers
+### Setting CR Servo Powers
 
 To use a CR Servo, apply the desired power using the setPower method; this is similar to setting a motor's power.
 
@@ -36,6 +40,6 @@ To use a CR Servo, apply the desired power using the setPower method; this is si
 testCRServo.setPower(0.5);
 ```
 
-# Servo Overshoot/Stalling
+## Servo Overshoot/Stalling
 
 Overshoot happens when a servo motor attempts to move past its physical limit, leading to erratic or bouncing movements. Persistent pushing against this limit can cause stalling or binding, potentially resulting in "servo hunting" — a state of continuous oscillation as the servo tries unsuccessfully to reach the target position. To prevent damage in mechanisms like claws, avoid overly tight grips on objects.
