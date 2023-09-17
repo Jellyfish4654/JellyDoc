@@ -10,13 +10,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public abstract class BaseOpMode extends LinearOpMode {
-    // Variable Definition
+    // Variable Definition - Define arrays to hold motor objects and instances of Claw and Slides classes
     protected DcMotor[] motors;
-    // Defines an instance variable that will hold a reference to an object of the Claw class
     protected Claw claws;
-
+    protected Slides slides;
+    // Method to initialize hardware components in OpModes
     protected void initHardware() {
-        // Motor initialization by getting them from the hardwareMap
+        // Motor initialization by getting them from the hardwareMap in array
         motors = new DcMotor[]{
                 hardwareMap.dcMotor.get("motor fr"),
                 hardwareMap.dcMotor.get("motor br"),
@@ -34,6 +34,11 @@ public abstract class BaseOpMode extends LinearOpMode {
         Servo claw = hardwareMap.get(Servo.class, "servo");
         // Create a Claw object and assign in to the claws variable (From the constructor inside the Claw class)
         claws = new Claw(claw);
+
+        // Getting references to the slide motor hardware and initializing Slides object with them
+        DcMotor leftSlideMotor = hardwareMap.get(DcMotor.class, "leftSlideMotor");
+        DcMotor rightSlideMotor = hardwareMap.get(DcMotor.class, "rightSlideMotor");
+        slides = new Slides(leftSlideMotor, rightSlideMotor);
     }
 }
 ````

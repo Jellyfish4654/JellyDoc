@@ -1,4 +1,5 @@
 import { Callout } from 'nextra/components'
+import { Tabs } from 'nextra/components'
 
 # TeleOp
 
@@ -57,7 +58,7 @@ switch (driveMode) {
 
 Our driver enhancements feature selectable drive modes, catering to individual preferences. While its impact is subtle, it showcases our adaptability and flexibility in drivetrain configurations to judges.
 
-```java'
+```java
 // DriveMode enum
 protected enum DriveMode {
     TANK, DRIVE, MECANUM, FIELDCENTRIC,
@@ -190,7 +191,9 @@ In FTC, subsystems comprise control elements like motors, servos, and sensors. T
 
 Develop a separate class for every mechanism and establish a method for each motion component. For example, this is the code for a claw:
 
-````java filename="BaseOpMode Class"
+<Tabs items={['BaseOpMode class', 'Claw class', 'Method Usage']}>
+  <Tabs.Tab>
+    ```java
 public abstract class BaseOpMode extends LinearOpMode {
     protected Claw claws;
 
@@ -199,9 +202,10 @@ public abstract class BaseOpMode extends LinearOpMode {
         claws = new Claw(claw);
     }
 }
-````
-
-````java filename="Claw Class"
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```java
 public class Claw {
     private Servo claw;
 
@@ -221,16 +225,21 @@ public class Claw {
         return claw.getPosition();
     }
 }
-````
-
-````java filename="Method Usage"
+    ```
+  </Tabs.Tab>
+</Tabs>
+  <Tabs.Tab>
+    ```java
 if (gamepad2.right_bumper) {
     claws.clawsClose();
 }
 if (gamepad2.left_bumper) {
     claws.clawsOpen();
 }
-````
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 # Arms/Slides
 
 Arms and slides are affected by gravity, so you will be forced to use a feedforward system. This video by KookyBotz showcases how to create and tune a feedforward system. 
