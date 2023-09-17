@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import type { DocsThemeConfig } from 'nextra-theme-docs'
 import { useConfig } from 'nextra-theme-docs'
 
+
 const config: DocsThemeConfig = {
   logo: <span>JellyDocs</span>,
   docsRepositoryBase: 'https://github.com/Jellyfish4654/JellyDocs/tree/main/JellyDocs',
@@ -31,6 +32,19 @@ const config: DocsThemeConfig = {
         />
       </>
     )
+  },
+  sidebar: {
+    titleComponent({ title, type }) {
+      if (type === 'separator') {
+        return <span className="cursor-default">{title}</span>
+      }
+      return <>{title}</>
+    },
+    defaultMenuCollapseLevel: 1,
+    toggleButton: true
+  },
+  toc: {
+    backToTop: true
   }
 }
 
