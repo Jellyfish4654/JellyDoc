@@ -6,5 +6,6 @@
     "Servos": "Servos",
     "Gamepad": "Gamepad",
     "MecanumPhysics": "Mecanum Physics",
-    "TeleOp": "TeleOp"
+    "TeleOp": "TeleOp",
+    "Practice": "Practice"
 }
