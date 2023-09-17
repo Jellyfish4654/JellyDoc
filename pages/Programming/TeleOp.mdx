@@ -239,15 +239,216 @@ Develop a separate class for every mechanism and establish a method for each mot
 
 ### Arms/Slides
 
-Arms and slides are affected by gravity, so you will be forced to use a feedforward system. This video by KookyBotz showcases how to create and tune a feedforward system.
+Arms and slides are affected by gravity, so you will be forced to use a feedforward system.
 
-<iframe
-  width="100%"
-  height="500px"
-  src="https://www.youtube.com/embed/E6H6Nqe6qJo"
-  frameborder="6"
-  allowfullscreen
-></iframe>
+<Tabs items={['BaseOpMode Class', 'Slides Class', 'TeleOp Example', 'PIDF Tuner']}>
+  <Tabs.Tab>
+    ```java
+    package org.firstinspires.ftc.teamcode.Framework;
+
+    import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+    import com.qualcomm.robotcore.hardware.DcMotor;
+    import com.qualcomm.robotcore.hardware.Servo;
+
+    public abstract class BaseOpMode extends LinearOpMode {
+        // Variable Definition - Define arrays to hold motor objects and instances of Claw and Slides classes
+        protected DcMotor[] motors;
+        protected Claw claws;
+        protected Slides slides;
+        // Method to initialize hardware components in OpModes
+        protected void initHardware() {
+            // Motor initialization by getting them from the hardwareMap in array
+            motors = new DcMotor[]{
+                    hardwareMap.dcMotor.get("motor fr"),
+                    hardwareMap.dcMotor.get("motor br"),
+                    hardwareMap.dcMotor.get("motor fl"),
+                    hardwareMap.dcMotor.get("motor bl")
+            };
+
+            // Based on the physical orientation of the motor on the robot, it sets the desired direction of the motor
+            motors[0].setDirection(DcMotor.Direction.REVERSE);
+            motors[1].setDirection(DcMotor.Direction.REVERSE);
+            motors[2].setDirection(DcMotor.Direction.FORWARD);
+            motors[3].setDirection(DcMotor.Direction.FORWARD);
+
+            // Initialize the servo hardware
+            Servo claw = hardwareMap.get(Servo.class, "servo");
+            // Create a Claw object and assign in to the claws variable (From the constructor inside the Claw class)
+            claws = new Claw(claw);
+
+            // Getting references to the slide motor hardware and initializing Slides object with them
+            DcMotor leftSlideMotor = hardwareMap.get(DcMotor.class, "leftSlideMotor");
+            DcMotor rightSlideMotor = hardwareMap.get(DcMotor.class, "rightSlideMotor");
+            slides = new Slides(leftSlideMotor, rightSlideMotor);
+        }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```java
+    package org.firstinspires.ftc.teamcode.Framework;
+
+    import com.ThermalEquilibrium.homeostasis.Controllers.Feedback.BasicPID;
+    import com.ThermalEquilibrium.homeostasis.Parameters.PIDCoefficients;
+    import com.qualcomm.robotcore.hardware.DcMotor;
+
+    public class Slides {
+        // Defining private variables to hold motor objects and constants for the PID controller
+        private DcMotor leftSlideMotor;
+        private DcMotor rightSlideMotor;
+        private final double Kp = 0;
+        private final double Ki = 0;
+        private final double Kd = 0;
+        private final double f = 0;
+        public int targetPosition = 0;
+        private final double ticksInDegree = 145.1 / 360.0;
+        PIDCoefficients coefficients = new PIDCoefficients(Kp,Ki,Kd);
+        BasicPID controller = new BasicPID(coefficients);
+        private double power;
+
+        // Constructor initializes the Slides object with the left and right slide motors
+        public Slides(DcMotor leftSlideMotor, DcMotor rightSlideMotor) {
+            this.leftSlideMotor = leftSlideMotor;
+            this.rightSlideMotor = rightSlideMotor;
+        }
+
+        // Method to set the target position for the slides
+        public void setTargetPosition(int targetPosition) {
+            this.targetPosition = targetPosition;
+        }
+
+        // Method updates the power to the slide motors using PID control and a feed-forward term
+        public void update() {
+            // Gets the current position of the motor
+            int currentPosition = leftSlideMotor.getCurrentPosition();
+            // Calculate the PID control output based on the current and target positions
+            double pid = controller.calculate(targetPosition, currentPosition);
+            // Calculate the feed-forward term to anticipate gravity's effect on the slide
+            double ff = Math.cos(Math.toRadians(targetPosition / ticksInDegree)) * f;
+            // Determine the total power as the sum of PID output and feed-forward term
+            this.power = pid + ff;
+            moveSlides(power);
+        }
+
+        // Method to set the power of both slide motors
+        public void moveSlides(double power) {
+            leftSlideMotor.setPower(power);
+            rightSlideMotor.setPower(power);
+        }
+        // Method to get the position of where you want the system to be
+        public int getTargetPosition() {
+            return this.targetPosition;
+        }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```java
+    package org.firstinspires.ftc.teamcode;
+
+    import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+    import org.firstinspires.ftc.teamcode.Framework.BaseOpMode;
+    @TeleOp(name = "PIDTele")
+    public class PIDTele extends BaseOpMode{
+        @Override
+        public void runOpMode() throws InterruptedException {
+            initHardware();
+            waitForStart();
+            // Main loop for the OpMode
+            while(opModeIsActive()){
+                // Manuel Joystick control
+                slides.setTargetPosition(slides.getTargetPosition() + (int) (gamepad2.left_stick_y * 0.5));
+                // Preset positions
+                if(gamepad2.a){
+                    slides.setTargetPosition(0);
+                }
+                if(gamepad2.b){
+                    slides.setTargetPosition(100);
+                }
+                // Updating the slide power using the PID controller inside the loop
+                slides.update();
+            }
+        }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```java
+    package org.firstinspires.ftc.teamcode;
+
+    import com.ThermalEquilibrium.homeostasis.Controllers.Feedback.BasicPID;
+    import com.ThermalEquilibrium.homeostasis.Parameters.PIDCoefficients;
+    import com.acmerobotics.dashboard.FtcDashboard;
+    import com.acmerobotics.dashboard.config.Config;
+    import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+    import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+    import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+    import com.qualcomm.robotcore.hardware.DcMotorEx;
+    import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+    @Config
+    @TeleOp(name = "PIDF Test")
+    public class PIDF_Test extends OpMode {
+        // Public static variables for tuning PIDF coefficients through the dashboard
+        public static double p = 0, i = 0, d = 0;
+        public static double f = 0;
+        public static int targetPosition = 0;
+
+        // Conversion factor for ticks to degrees
+        private final double ticksInDegree = 145.1 / 360.0;
+
+        // Motor declarations
+        private DcMotorEx slideRight, slideLeft;
+
+        // PID coefficients object initialization
+        PIDCoefficients coefficients = new PIDCoefficients(p, i, d);
+
+        @Override
+        public void init(){
+            // Setting up telemetry with the FTC dashboard
+            telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
+            // Mapping and initializing motors
+            slideRight = hardwareMap.get(DcMotorEx.class, "rightSlide");
+            slideLeft = hardwareMap.get(DcMotorEx.class, "leftSlide");
+            slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        }
+
+        @Override
+        public void loop(){
+            // Re-initializing the PID controller with the latest coefficients
+            BasicPID controller = new BasicPID(coefficients);
+
+            // Getting the current position of the right slide
+            int currentPosition = slideRight.getCurrentPosition();
+
+            // Calculating PID output using the target and current positions
+            double pid = controller.calculate(targetPosition, currentPosition);
+
+            // Calculating feed-forward term using the cosine of the target angle
+            double ff = Math.cos(Math.toRadians(targetPosition / ticksInDegree)) * f;
+
+            // Combining PID and feed-forward terms to get the total power
+            double power = pid + ff;
+
+            // Setting the motor powers with the calculated power
+            slideRight.setPower(power);
+            slideLeft.setPower(power);
+
+            // Sending the current state to the telemetry
+            telemetry.addData("right_pos", slideRight.getCurrentPosition());
+            telemetry.addData("left_pos", slideLeft.getCurrentPosition());
+            telemetry.addData("target", targetPosition);
+            telemetry.update();
+        }
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
 
 ## Filters
 
