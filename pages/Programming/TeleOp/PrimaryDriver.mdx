@@ -2,7 +2,7 @@
 
 The primary driver's role is to maneuver the robot. To facilitate this, the programmer should integrate driver enhancements into the TeleOp code, which will be segmented for better management.
 
-### Precision Mode
+## Precision Mode
 
 The precision method adjusts our robot's motor speeds with a multiplier, creating a mode for enhanced control. It also scales motor values to fit the FTC SDK range of -1 to 1.
 
@@ -44,7 +44,7 @@ protected void setMotorSpeeds(double mult, double[] powers) {
 }
 ...
 
-### Drive Modes
+## Drive Modes
 
 Our driver enhancements feature selectable drive modes, catering to individual preferences. While its impact is subtle, it showcases our adaptability and flexibility in drivetrain configurations to judges.
 
@@ -127,7 +127,7 @@ public void runOpMode() throws InterruptedException {
 }
 ````
 
-### Field Centric
+## Field Centric
 
 In Field Centric Drive mode, the translation joystick allows the robot’s direction to be controlled relative to the field/driver rather than the robot’s frame. The code uses the Control Hub IMU to rotate the robot’s movement relative to its rotation. One issue with the IMU is that it can fail due to lag or other factors, so the code includes a failsafe that resets the IMU if necessary.
 
