@@ -1,10 +1,6 @@
 {
-    "GettingStarted": "Getting Started",
-    "OpMode": "OpMode",
-    "BaseOpMode": "BaseOpMode",
-    "Motors": "Motors",
-    "Servos": "Servos",
-    "Gamepad": "Gamepad",
-    "MecanumPhysics": "Mecanum Physics",
+    "Introduction": "Introduction",
+    "HardwareAbstractions": "Hardware Abstractions",
+    "RoboticsFramework": "Robotics Framework",
     "TeleOp": "TeleOp"
 }
