@@ -1,0 +1,57 @@
+# Control Theory
+
+Control Theory is a branch of engineering that focuses on the dynamics and behavior of systems. Leveraging both algebra and calculus, it offers tools to analyze, predict, and shape system responses to achieve desired outcomes, ensuring stability and resilience against disturbances and uncertainties.
+
+## Closed Loop System
+
+A closed-loop control system, also known as a feedback control system, utilizes a controller (algorithm) to adjust the system's input based on its observed output. In other words, a closed-loop system employs feedback from the system's output to fine-tune its input, ensuring the system achieves and maintains the desired outcome.
+
+## PID Controller
+
+A PID controller stands for Proportional-Integral-Derivative controller and is one of the most commonly used feedback controllers.
+
+### Proportional Term
+
+The Proportional term drives the position error to zero. The proportional term provides an output value that is directly proportional to the current error.
+
+\[ P(t) = K_p \times e(t) \]
+
+Where:
+
+- \( K_p \) is the proportional gain.
+- \( e(t) \) is the current error
+
+### Derivative Term
+
+The Derivative term drives the velocity error to zero. This term predicts the trend of the error by evaluating its rate of change, acting to dampen the system response and prevent overshooting.
+
+\[ D(t) = K_d \times \frac{de(t)}{dt} \]
+
+Where:
+
+- \( K_d \) is the derivative gain.
+- \( \frac{de(t)}{dt} \) is the rate of change of the error.
+
+### Integral Term
+
+The Integral term accumulates the sum of past errors. In other words, it's the integral of the error with respect to time. The steady-state error is the difference between the desired final output and the actual one, indicating an error that has persisted over time. The integral term eliminates the residual steady-state error that occurs within a controller.
+
+\[ I(t) = K_i \times \int e(t) \, dt \]
+
+Where:
+
+- \( K_i \) is the integral gain.
+- \( \int e(t) \, dt \) is the integral of the error over time.
+
+### Combining the Terms
+
+The complete control output \( u(t) \) from the PID controller is the sum of these three terms:
+
+\[ u(t) = K_p \times e(t) + K_d \times \frac{de(t)}{dt} + K_i \times \int e(t) \, dt \]
+
+### Tuning
+
+1. Start with \( K_p \), \( K_i \), and \( K_d \) at 0.
+2. Increase \( K_p \) until steady-state error is low.
+3. Increase \( K_i \) until steady-state error is removed entirely.
+4. Increase \( K_d \) until oscillations are removed.
