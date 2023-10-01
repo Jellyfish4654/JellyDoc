@@ -21,17 +21,6 @@ Where:
 - \( K_p \) is the proportional gain.
 - \( e(t) \) is the current error
 
-### Derivative Term
-
-The Derivative term drives the velocity error to zero. This term predicts the trend of the error by evaluating its rate of change, acting to dampen the system response and prevent overshooting.
-
-\[ D(t) = K_d \times \frac{de(t)}{dt} \]
-
-Where:
-
-- \( K_d \) is the derivative gain.
-- \( \frac{de(t)}{dt} \) is the rate of change of the error.
-
 ### Integral Term
 
 The Integral term accumulates the sum of past errors. In other words, it's the integral of the error with respect to time. The steady-state error is the difference between the desired final output and the actual one, indicating an error that has persisted over time. The integral term eliminates the residual steady-state error that occurs within a controller.
@@ -42,6 +31,17 @@ Where:
 
 - \( K_i \) is the integral gain.
 - \( \int e(t) \, dt \) is the integral of the error over time.
+
+### Derivative Term
+
+The Derivative term drives the velocity error to zero. This term predicts the trend of the error by evaluating its rate of change, acting to dampen the system response and prevent overshooting.
+
+\[ D(t) = K_d \times \frac{de(t)}{dt} \]
+
+Where:
+
+- \( K_d \) is the derivative gain.
+- \( \frac{de(t)}{dt} \) is the rate of change of the error.
 
 ### Combining the Terms
 
