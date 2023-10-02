@@ -15,12 +15,12 @@ A PID controller stands for Proportional-Integral-Derivative controller and is o
 The Proportional term drives the position error to zero. The proportional term provides an output value that is directly proportional to the current error.
 
 $$
-P(t) = Kp \times e(t)
+P(t) = K_p \times e(t)
 $$
 
 Where:
 
-- $Kp$ is the proportional gain.
+- $K_p$ is the proportional gain.
 - $e(t)$ is the current error
 
 ### Derivative Term
@@ -28,12 +28,12 @@ Where:
 The Derivative term drives the velocity error to zero. This term predicts the trend of the error by evaluating its rate of change, acting to dampen the system response and prevent overshooting.
 
 $$
-D(t) = Kd \times \frac{de(t)}{dt}
+D(t) = K_d \times \frac{de(t)}{dt}
 $$
 
 Where:
 
-- $Kd$ is the derivative gain.
+- $K_d$ is the derivative gain.
 - $\frac{de(t)}{dt}$ is the rate of change of the error.
 
 ### Integral Term
@@ -41,12 +41,12 @@ Where:
 The Integral term accumulates the sum of past errors. In other words, it's the integral of the error with respect to time. The steady-state error is the difference between the desired final output and the actual one, indicating an error that has persisted over time. The integral term eliminates the residual steady-state error that occurs within a controller.
 
 $$
-I(t) = Ki \times \int e(t) \, dt
+I(t) = K_i \times \int e(t) \, dt
 $$
 
 Where:
 
-- $Ki$ is the integral gain.
+- $K_i$ is the integral gain.
 - $\int e(t) \, dt$ is the integral of the error over time.
 
 ### Combining the Terms
@@ -54,15 +54,15 @@ Where:
 The complete control output $u(t)$ from the PID controller is the sum of these three terms:
 
 $$
-u(t) = Kp \times e(t) + Kd \times \frac{de(t)}{dt} + Ki \times \int e(t) \, dt
+u(t) = K_p \times e(t) + K_d \times \frac{de(t)}{dt} + K_i \times \int e(t) \, dt
 $$
 
 ### Tuning
 
-1. Start with $Kp$, $Ki$, and $Kd$ at 0.
-2. Increase $Kp$ until steady-state error is low.
-3. Increase $Ki$ until steady-state error is removed entirely.
-4. Increase $Kd$ until oscillations are removed.
+1. Start with $K_p$, $K_i$, and $K_d$ at 0.
+2. Increase $K_p$ until steady-state error is low.
+3. Increase $K_i$ until steady-state error is removed entirely.
+4. Increase $K_d$ until oscillations are removed.
 
 ## Feedforward Control
 
