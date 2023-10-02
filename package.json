@@ -1,7 +1,7 @@
 {
   "name": "JellyDocs",
   "version": "0.0.1",
-  "description": "JellyDocse",
+  "description": "The JellyDocs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
