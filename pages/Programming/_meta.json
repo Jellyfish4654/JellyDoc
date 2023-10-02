@@ -1,8 +1,8 @@
 {
-    "LearningJava": "Learning Java",
-    "Introduction": "Introduction",
-    "HardwareAbstractions": "Hardware Abstractions",
-    "RoboticsFramework": "Robotics Framework",
+    "learning-java": "",
+    "introduction": "",
+    "hardwareabstractions": "",
+    "robotics-framework": "",
     "TeleOp": "TeleOp",
-    "ControlTheory": "Control Theory"
+    "control-theory": ""
 }
