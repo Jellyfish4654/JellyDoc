@@ -1,6 +1,6 @@
 {
-    "Motors": "Motors",
-    "Servos": "Servos",
-    "MecanumPhysics": "Mecanum Physics",
-    "Gamepad": "Gamepad"
+    "motors": "Motors",
+    "servos": "Servos",
+    "mecanum-physics": "Mecanum Physics",
+    "gamepad": "Gamepad"
 }

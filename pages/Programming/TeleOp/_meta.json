@@ -1,4 +1,4 @@
 {
-  "PrimaryDriver": "Primary Driver",
-  "SecondaryDriver": "Secondary Driver"
+  "primary-driver": "Primary Driver",
+  "secondary-driver": "Secondary Driver"
 }
