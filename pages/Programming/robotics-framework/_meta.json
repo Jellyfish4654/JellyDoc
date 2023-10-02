@@ -1,4 +1,4 @@
 {
-    "LinearOpMode": "LinearOpMode",
-    "BaseOpMode": "BaseOpMode"
+    "linearopmode": "LinearOpMode",
+    "baseopmode": "BaseOpMode"
 }

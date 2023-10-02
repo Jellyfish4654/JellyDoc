@@ -3,6 +3,6 @@
     "introduction": "Introduction",
     "hardware-abstractions": "Hardware Abstractions",
     "robotics-framework": "Robotics Framework",
-    "TeleOp": "TeleOp",
+    "teleop": "TeleOp",
     "control-theory": "Control Theory"
 }
