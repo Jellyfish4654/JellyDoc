@@ -66,4 +66,22 @@ $$
 
 ## Feedforward Control
 
-WIP
+Feedforward aims to maintain or achieve a desired output by considering the system's dynamics and the known or expected disturbances. Input voltage (power) is proportional to force and gravity is a constant force, so a constant voltage feedforward can compensate for gravity.
+
+## Filters
+
+A filter is a causal system that filters information through a
+probabilistic model to produce an estimate of a desired quantity that can’t be measured
+directly. It smooths the noise level which is the standard deviation of the sensor.
+
+### Low-pass filter
+
+A low-pass filter filters signals by only allowing low frequency signals to pass through. Noise is often comprised of high-frequency components, and by using a low-pass filter, it allows you to elimintate high noise frequencies and obtain a clear, and stable signal.
+
+### Phase Lag
+
+While filters, such as the low-pass type, are beneficial in reducing noise levels, they come with a trade-off known as phase lag. Phase lag refers to the delay or shift in phase of the output signal compared to the input signal. As filters work by processing and averaging the input signals, they inherently introduce some time delay, which results in this lag. 
+
+### Kalman Filter
+
+The Kalman filter is a recursive filter that provides optimal estimates of the state of a system, based on a series of measurements over time. Rather than merely relying on past measurements like some other filters, the Kalman filter operates by *projecting the state forward*, using a mathematical model of the system. This forward projection allows the Kalman filter to anticipate where the system is going, making it adept at handling noisy measurements. Compared to a low-pass filter, a significant advantage of the Kalman filter is that it typically introduces less lag, making its estimates more timely and accurate. 
