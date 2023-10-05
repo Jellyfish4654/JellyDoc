@@ -274,34 +274,16 @@ Arms and slides are affected by gravity, so you will be forced to use a feedforw
 
 Filters enhance sensor precision and accuracy by reducing noise levels. Additionally, filters are great to mention the Control Award. There are multiple libraries that will make it easy to implement filters.
 
-<Callout type="info" emoji="💡">
-  Examples are taken from [CTRL ALT FTC](https://www.ctrlaltftc.com/)
-</Callout>
+
 
 ### Low pass filter
 
 The low pass filter is a basic algorithm that reduces noise levels by smoothing the values.
 
-```java
-double a = 0.9;
-LowPassFilter filter = new LowPassFilter(a);
-while (true) {
-    double currentValue = readNoisySensor();
-    double estimate = filter.estimate(currentValue);
-}
-```
+
 
 ### Kalman Filter
 
 A Kalman filter at the highest level is an algorithm that optimally estimates any given state of a system
 
-```java
-double Q = 0.3;
-double R = 3;
-int N = 3;
-KalmanFilter filter = new KalmanFilter(Q,R,N);
-while (true) {
-    double currentValue = readNoisySensor();
-    double estimate = filter.estimate(currentValue);
-}
-```
+

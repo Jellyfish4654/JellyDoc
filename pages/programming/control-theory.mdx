@@ -1,3 +1,6 @@
+import { Callout } from "nextra/components";
+import { Tabs } from "nextra/components";
+
 # Control Theory
 
 Control Theory is a branch of engineering that focuses on the dynamics and behavior of systems. Leveraging both algebra and calculus, it offers tools to analyze, predict, and shape system responses to achieve desired outcomes, ensuring stability and resilience against disturbances and uncertainties.
@@ -82,6 +85,19 @@ directly. It smooths the noise level which is the standard deviation of the sens
 
 A low-pass filter filters signals by only allowing low frequency signals to pass through. Noise is often comprised of high-frequency components, and by using a low-pass filter, it allows you to elimintate high noise frequencies and obtain a clear, and stable signal.
 
+```java
+double a = 0.9;
+LowPassFilter filter = new LowPassFilter(a);
+while (true) {
+    double currentValue = readNoisySensor();
+    double estimate = filter.estimate(currentValue);
+}
+```
+
+<Callout type="info" emoji="💡">
+  Examples are taken from [CTRL ALT FTC](https://www.ctrlaltftc.com/)
+</Callout>
+
 ### Phase Lag
 
 While filters, such as the low-pass type, are beneficial in reducing noise levels, they come with a trade-off known as phase lag. Phase lag refers to the delay or shift in phase of the output signal compared to the input signal. As filters work by processing and averaging the input signals, they inherently introduce some time delay, which results in this lag. 
@@ -89,3 +105,14 @@ While filters, such as the low-pass type, are beneficial in reducing noise level
 ### Kalman Filter
 
 The Kalman filter is a recursive filter that provides optimal estimates of the state of a system, based on a series of measurements over time. Rather than merely relying on past measurements like some other filters, the Kalman filter operates by *projecting the state forward*, using a mathematical model of the system. This forward projection allows the Kalman filter to anticipate where the system is going, making it adept at handling noisy measurements. Compared to a low-pass filter, a significant advantage of the Kalman filter is that it typically introduces less lag, making its estimates more timely and accurate. 
+
+```java
+double Q = 0.3;
+double R = 3;
+int N = 3;
+KalmanFilter filter = new KalmanFilter(Q,R,N);
+while (true) {
+    double currentValue = readNoisySensor();
+    double estimate = filter.estimate(currentValue);
+}
+```
