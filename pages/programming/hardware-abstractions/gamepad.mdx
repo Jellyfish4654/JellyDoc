@@ -26,11 +26,17 @@
 
 ## Rising Edge Detector
 
-The most commonly used technique is a rising edge detector. It allows code to be run only once upon the initial button press rather than continuously while the button is held down. It verifies the button was not pressed in the previous loop but is pressed currently.
+The most commonly used technique is a rising edge detector. It allows code to be run only once upon the initial button press rather than continuously while the button is held down. It verifies the button was not pressed in the previous loop but is pressed currently. 
 
 ```java
+// Usage
 if (currentGamepad1.a && !previousGamepad1.a) {
     servo.setPosition(servo.getPosition() + 0.1);
+}
+
+// Rising Edge Detector method
+public boolean risingEdgeDetect(boolean current, boolean previous) {
+    return current && !previous;
 }
 ```
 
