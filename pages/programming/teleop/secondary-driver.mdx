@@ -270,20 +270,96 @@ Arms and slides are affected by gravity, so you will be forced to use a feedforw
   </Tabs.Tab>
 </Tabs>
 
-## Filters
+## Bang Bang Controller
 
-Filters enhance sensor precision and accuracy by reducing noise levels. Additionally, filters are great to mention the Control Award. There are multiple libraries that will make it easy to implement filters.
+<Tabs items={['BaseOpMode Class', 'Hanger Class', 'TeleOp Example']}>
+  <Tabs.Tab>
+    ```java
+    package org.firstinspires.ftc.teamcode.Framework;
+
+    import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+    import com.qualcomm.robotcore.hardware.DcMotor;
+
+    public abstract class BaseOpMode extends LinearOpMode {
+        // Variable Definition 
+        protected Hanger hanger;
+        // Method to initialize hardware components in OpModes
+        protected void initHardware() {
+            //Hanger
+            DcMotor hangerMotor = hardwareMap.get(DcMotor.class, "hangerMotor");
+            hanger = new Hanger(hangerMotor);
+        }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```java
+    package org.firstinspires.ftc.teamcode.Framework;
+
+    import com.qualcomm.robotcore.hardware.DcMotor;
+    public class Hanger {
+        private static final double MAX_OUTPUT = 1.0;
+        private static final double TOLERANCE = 3.0;
+
+        private DcMotor hangerMotor;
+        private double targetPosition;
+
+        public Hanger(DcMotor hangerMotor) {
+            this.hangerMotor = hangerMotor;
+        }
+
+        public void setTargetPosition(double targetPosition) {
+            this.targetPosition = targetPosition;
+        }
+
+        public void update() {
+            double currentPosition = hangerMotor.getCurrentPosition();
+            double command = calculate(targetPosition, currentPosition);
+            hangerMotor.setPower(command);
+        }
+
+        private double calculate(double reference, double position) {
+            if (Math.abs(reference - position) < TOLERANCE) {
+                return 0.0;
+            } else if (reference > position) {
+                return MAX_OUTPUT;
+            } else {
+                return -MAX_OUTPUT;
+            }
+        }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```java
+    package org.firstinspires.ftc.teamcode;
+
+    import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+    import org.firstinspires.ftc.teamcode.Framework.BaseOpMode;
+
+    @TeleOp(name = "Power Play JellyTele")
+    public class JellyTele extends BaseOpMode {
+        public void runOpMode() throws InterruptedException {
+            // Init hardware from BaseOpMode
+            initHardware();
+            waitForStart();
+
+            while (opModeIsActive()) {
+                //Hanger
+                if (gamepad2.a) {
+                    hanger.setTargetPosition(0);
+                }
+                if (gamepad2.b) {
+                    hanger.setTargetPosition(1000);
+                }
+            }
+        }
 
 
+    }
+    ```
 
-### Low pass filter
-
-The low pass filter is a basic algorithm that reduces noise levels by smoothing the values.
-
-
-
-### Kalman Filter
-
-A Kalman filter at the highest level is an algorithm that optimally estimates any given state of a system
-
-
+  </Tabs.Tab>
+</Tabs>
