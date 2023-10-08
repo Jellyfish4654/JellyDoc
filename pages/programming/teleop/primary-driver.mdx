@@ -6,7 +6,7 @@ The primary driver's role is to maneuver the robot. To facilitate this, the prog
 
 The precision method adjusts our robot's motor speeds with a multiplier, creating a mode for enhanced control. It also scales motor values to fit the FTC SDK range of -1 to 1.
 
-````java
+```java
 double mult = gamepad1.left_bumper ? 0.35 : gamepad1.right_bumper ? 0.7 : 1.0;
 // DRIVE MODE
 switch (driveMode){
@@ -125,7 +125,7 @@ public void runOpMode() throws InterruptedException {
         }
     }
 }
-````
+```
 
 ## Field Centric
 
