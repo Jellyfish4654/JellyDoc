@@ -18,41 +18,55 @@ The LinearOpMode class in the FTC Robot Controller SDK facilitates the creation 
 ## TeleOp LinearOpMode
 
 ```java
-@TeleOp(name = "JellyTele")
-public class JellyTele extends LinearOpMode{
-    @Override
-    public void runOpMode() throws InterruptedException {
-        //Initialization Code Goes Here
-        waitForStart();
-        while(opModeIsActive()){
-            //while loop for when program is active
-            //Code repeated during teleop goes here
-            //Analogous to loop() method in OpMode
-        }
+// Import required classes for LinearOpMode
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp(name = "TeleOpName ")
+public class JellyTele extends LinearOpMode {
+    // Declare objects here
+
+    // The main runOpMode method - called when the INIT button is pressed.
+    public void runOpMode() throws InterruptedException {
+        // Initialization code goes here
+
+        // Wait for the start button to be pressed.
+        waitForStart();
+
+        // Main loop - This loop runs repeatedly after the START button is pressed
+        while(opModeIsActive()) {
+            // Code to control the robot goes here
+        }
     }
 }
 ```
 
-## Auto LinearOpMode
+## TeleOp Example
 
 ```java
-@Autonomous(name = "JellyAuto")
-public class JellyAuto extends LinearOpMode{
-    @Override
-    public void runOpMode() throws InterruptedException {
-        //Initialization Code Goes Here
-        waitForStart();
-        //Auto Code Goes Here
+// Import required classes
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
+@TeleOp(name = "MotorTeleOp")
+public class MotorTeleOp extends LinearOpMode {
+    // Declare the motor
+    protected DcMotorEx Motor;
+
+    // The main runOpMode method - called when the INIT button is pressed.
+    public void runOpMode() throws InterruptedException {
+        // Sets motor object to hardwareMap
+        Motor = hardwareMap.get(DcMotorEx.class, "motorName");
+
+        // Wait for the start button to be pressed.
+        waitForStart();
+
+        // Main loop - This loop runs repeatedly after the START button is pressed
+        while(opModeIsActive()) {
+            // Powers motor at full power in the loop
+            Motor.setPower(1);
+        }
     }
 }
 ```
-
-import { Callout } from 'nextra/components'
- 
-<Callout type="info" emoji="💡">
-  The LinearOpMode methods for auto can vary
-</Callout
-
->
