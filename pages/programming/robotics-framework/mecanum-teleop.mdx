@@ -100,15 +100,14 @@ Understanding Mecanum wheel control involves translating gamepad inputs into mot
    double backLeftPower = (speed - strafe + rotate) / denominator;
    double frontRightPower = (speed - strafe - rotate) / denominator;
    double backRight
+
+   Power = (speed + strafe - rotate) / denominator;
+   // Setting the scaled motor powers
+   frontLeftMotor.setPower(frontLeftPower);
+   backLeftMotor.setPower(backLeftPower);
+   frontRightMotor.setPower(frontRightPower);
+   backRightMotor.setPower(backRightPower);
    ```
-
-Power = (speed + strafe - rotate) / denominator;
-
-// Setting the scaled motor powers
-frontLeftMotor.setPower(frontLeftPower);
-backLeftMotor.setPower(backLeftPower);
-frontRightMotor.setPower(frontRightPower);
-backRightMotor.setPower(backRightPower);
 
 ```
 
