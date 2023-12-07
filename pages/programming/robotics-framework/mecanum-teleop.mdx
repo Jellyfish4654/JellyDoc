@@ -1,0 +1,115 @@
+# Mecanum TeleOp
+
+## Understanding Mecanum Wheels
+
+#### 1. Design and Structure:
+
+- **Unique Configuration**: Mecanum wheels have unique rollers positioned at a 45-degree angle around the wheel.
+
+#### 2. Movement Mechanics:
+
+- **Holonomic Movement**: These wheels enable a robot to move in any horizontal direction without changing the wheels' or robot's orientation.
+- **Vector Force**: Rotating Mecanum wheels generate a 45-degree force vector, combining to move the robot.
+
+#### 3. Wheel Arrangement:
+
+- **X Configuration**: The wheels are mounted to form an 'X' pattern when viewed from above, crucial for omnidirectional movement.
+
+![Image](/assets/mecanumDirections.png)
+
+### Mecanum Wheel Coding
+
+Understanding Mecanum wheel control involves translating gamepad inputs into motor movements for omnidirectional mobility.
+
+#### Basic Tank Drive Control
+
+1. **Forward/Backward Movement**:
+
+   - **Gamepad Y Axis**: Controls forward and backward movement.
+   - **Motor Power Assignment**: Motor power is set based on the Y-axis value.
+   - **Reversing Y-Axis**: The Y-axis is often reversed in control systems.
+
+   ```java
+   // Basic Forward/Backward Movement Control
+   double speed = -gamepad1.left_stick_y; // Inverting Y-axis value
+
+   // Setting motor powers for forward/backward motion
+   leftMotor.setPower(speed);
+   rightMotor.setPower(speed);
+   ```
+
+2. **Adding Rotation (Pivot Turning)**:
+
+   - **Gamepad X Axis**: Controls rotation.
+   - **Power Adjustment for Rotation**: Differential power adjustments cause the robot to turn.
+
+   ```java
+   // Adding Rotation (Pivot Turning) Control
+   double speed = -gamepad1.left_stick_y; // Inverting Y-axis value
+   double rotate = gamepad1.right_stick_x; // Right stick X-axis for rotation
+
+   // Adjusting motor powers for rotation
+   leftMotor.setPower(speed + rotate);
+   rightMotor.setPower(speed - rotate);
+   ```
+
+#### Mecanum Wheel Control
+
+1. **Omnidirectional Movement**:
+
+   - **Left Stick X Axis for Strafing**: Controls sideways movement.
+   - **Wheel Power Calculation**: Combines speed, strafe, and rotation values.
+   - **Diagonal Wheel Coordination**: Determines the direction of strafing.
+
+   ```java
+   // Mecanum Wheel Omnidirectional Movement Control
+   double speed = -gamepad1.left_stick_y;  // Forward/Backward (Y-axis)
+   double strafe = gamepad1.left_stick_x;   // Strafing (X-axis)
+   double rotate = gamepad1.right_stick_x;  // Rotation (right stick X-axis)
+
+   // Calculating motor powers for omnidirectional movement
+   frontLeftMotor.setPower(speed + strafe + rotate);
+   backLeftMotor.setPower(speed - strafe + rotate);
+   frontRightMotor.setPower(speed - strafe - rotate);
+   backRightMotor.setPower(speed + strafe - rotate);
+   ```
+
+2. **Control Equations**:
+
+   - **Direction and Speed**: `speed` controls forward/backward, `strafe` controls sideways movement, and `rotate` adds rotation.
+
+3. **Motor Spin Direction**:
+
+   - **Default Spin**: FTC motors typically spin counterclockwise with positive power.
+   - **Gear Configuration**: Gears can change the effective direction of motor rotation.
+
+4. **Code Improvements**:
+
+   - **Strafing Accuracy**: Multiplying `strafe` by a factor like 1.1.
+   - **Power Scaling**: Ensuring motor power values stay within -1 to 1 range.
+
+   ```java
+   // Code Improvements for Strafing Accuracy and Power Scaling
+   double speed = -gamepad1.left_stick_y; // Forward/Backward (Y-axis)
+   double strafe = gamepad1.left_stick_x * 1.1; // Improved strafing (X-axis, scaled)
+   double rotate = gamepad1.right_stick_x; // Rotation (right stick X-axis)
+
+   // Scaling motor powers to maintain ratio and limit within [-1, 1]
+   double denominator = Math.max(Math.abs(speed) + Math.abs(strafe) + Math.abs(rotate), 1);
+   double frontLeftPower = (speed + strafe + rotate) / denominator;
+   double backLeftPower = (speed - strafe + rotate) / denominator;
+   double frontRightPower = (speed - strafe - rotate) / denominator;
+   double backRight
+   ```
+
+Power = (speed + strafe - rotate) / denominator;
+
+// Setting the scaled motor powers
+frontLeftMotor.setPower(frontLeftPower);
+backLeftMotor.setPower(backLeftPower);
+frontRightMotor.setPower(frontRightPower);
+backRightMotor.setPower(backRightPower);
+
+```
+
+```

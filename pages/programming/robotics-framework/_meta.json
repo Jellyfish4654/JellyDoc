@@ -1,4 +1,5 @@
 {
   "linearopmode": "LinearOpMode",
+  "mecanum-teleop": "Mecanum TeleOp",
   "baseopmode": "BaseOpMode"
 }
