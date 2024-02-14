@@ -11,14 +11,15 @@
 
 ## Mecanum Wheel Control
 
-y = forward velocity (forward/backward)\
-x = strafe velocity (left/right)\
+y = forward velocity\
+x = strafe velocity \* l\
 r = rotational velocity\
+denominator=max(Math.abs(y)+Math.abs(x)+Math.abs(r),1)\
 
-frontLeftMotor = y + x + r\
-backLeftMotor = y - x + r\
-frontRightMotor = y - x - r\
-backRightMotor = y + x - r\
+frontLeftMotor = (y + x + r)/denominator\
+backLeftMotor = (y - x + r)/denominator\
+frontRightMotor = (y - x - r)denominator\
+backRightMotor = (y + x - r)/denominator\
 
 ## Deriving Mecanum Wheel Control
 
@@ -63,3 +64,8 @@ frontRightMotor = y - x - r
 backRightMotor = y + x - r
 
 ![Image](/assets/BR.png)
+
+f = strafe adjustment factor = tracklength/trackwidth
+The strafe adjustment factor counteracts imperfect strafing caused by the difference between tracklength and trackwidth.
+
+The SDK simply clips to the range `-1 to 1`. This causes us to lose the ratio between the wheel velocities, leading to deviations from the robot's intended path. The denominator normalizes the velocity of the wheels to ensure that all the powers maintain the same ratio when the largest power’s absolute value exceeds 1.
