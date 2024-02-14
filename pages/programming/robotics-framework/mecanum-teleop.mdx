@@ -11,21 +11,43 @@
 
 ## Mecanum Wheel Control
 
-y = forward velocity\
-x = strafe velocity \* l\
-r = rotational velocity\
-denominator=max(Math.abs(y)+Math.abs(x)+Math.abs(r),1)\
+$$
+y = \text{forward velocity}
+$$
 
-frontLeftMotor = (y + x + r)/denominator\
-backLeftMotor = (y - x + r)/denominator\
-frontRightMotor = (y - x - r)denominator\
-backRightMotor = (y + x - r)/denominator\
+$$
+x = \text{strafe velocity} \times f
+$$
+
+$$
+r = \text{rotational velocity}
+$$
+
+$$
+\text{denominator} = \max(\lvert y \rvert + \lvert x \rvert + \lvert r \rvert, 1)
+$$
+
+$$
+\text{frontLeftMotor} = \frac{y + x + r}{\text{denominator}}
+$$
+
+$$
+\text{backLeftMotor} = \frac{y - x + r}{\text{denominator}}
+$$
+
+$$
+\text{frontRightMotor} = \frac{y - x - r}{\text{denominator}}
+$$
+
+$$
+\text{backRightMotor} = \frac{y + x - r}{\text{denominator}}
+$$
 
 ## Deriving Mecanum Wheel Control
 
 Let break the down to understand it
 
-Motors = y
+$$Motors = y$$
 
 ![Image](/assets/forward_backward.png)
 
@@ -34,38 +56,60 @@ Remember that joysticks have an interval of `-1 to 1`.\
 Motors moves counterclockwise so you want to reverse the y direction:\
 `double y = -gamepad1.left_stick_y;`\
 
-leftMotors = y+r\
-rightMotors = y-r\
+$$
+\text{leftMotors} = y + r
+$$
+
+$$
+\text{rightMotors} = y - r
+$$
 
 Now in our current form, we have a differential drive/tank drive, enabling differential steering.
 
 ![Image](/assets/rotation.png)
 
 If both sticks are pushed at the same time, it will cause the robot to move in a curve\
-leftMotors = 1+1 = 2 (Clipped to 1)\
-rightMotors = 1-1 = 0\
+
+$$
+\text{leftMotors} = 1 + 1 = 2 \, (\text{Clipped to } 1)
+$$
+
+$$
+\text{rightMotors} = 1 - 1 = 0
+$$
 
 ![Image](/assets/curve.png)
 
 We add the final x value to enable omnidirectional movement based on the direction of the vector forces for each wheel.
 
-frontLeftMotor = y + x + r
+$$
+\text{frontLeftMotor} = y + x + r
+$$
 
 ![Image](/assets/FL.png)
 
-backLeftMotor = y - x + r
+$$
+\text{backLeftMotor} = y - x + r
+$$
 
 ![Image](/assets/BL.png)
 
-frontRightMotor = y - x - r
+$$
+\text{frontRightMotor} = y - x - r
+$$
 
 ![Image](/assets/FR.png)
 
-backRightMotor = y + x - r
+$$
+\text{backRightMotor} = y + x - r
+$$
 
 ![Image](/assets/BR.png)
 
-f = strafe adjustment factor = tracklength/trackwidth
+$$
+f = \text{strafe adjustment factor} = \frac{\text{track length}}{\text{track width}}
+$$
+
 The strafe adjustment factor counteracts imperfect strafing caused by the difference between tracklength and trackwidth.
 
 The SDK simply clips to the range `-1 to 1`. This causes us to lose the ratio between the wheel velocities, leading to deviations from the robot's intended path. The denominator normalizes the velocity of the wheels to ensure that all the powers maintain the same ratio when the largest power’s absolute value exceeds 1.
