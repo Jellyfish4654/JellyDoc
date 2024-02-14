@@ -11,15 +11,14 @@
 
 ## Mecanum Wheel Control
 
-<div style="text-align:left;">
+<div style={{ textAlign: "left" }}>
+  
 $$
 y = \text{forward velocity} \\
 x = \text{strafe velocity} \times f \\
 r = \text{rotational velocity}
 $$
-</div>
 
-<div style="text-align:left;">
 $$
 \text{denominator} = \max(\lvert y \rvert + \lvert x \rvert + \lvert r \rvert, 1) \\
 \text{frontLeftMotor} = \frac{y + x + r}{\text{denominator}} \\
@@ -27,62 +26,89 @@ $$
 \text{frontRightMotor} = \frac{y - x - r}{\text{denominator}} \\
 \text{backRightMotor} = \frac{y + x - r}{\text{denominator}}
 $$
+
 </div>
 
 ## Deriving Mecanum Wheel Control
 
 Let break the down to understand it
 
-<div style="text-align:left;">$$ Motors = y $$</div>
+<div style={{ textAlign: "left" }}>
+
+$$ Motors = y $$
+
+</div>
 
 ![Image](/assets/forward_backward.png)
 
-Forward/Back movement is obvious, however, there are still a few things to note.\
-Remember that joysticks have an interval of `-1 to 1`.\
-Motors moves counterclockwise so you want to reverse the y direction:\
-`double y = -gamepad1.left_stick_y;`
+Forward/Back movement is obvious, however, there are still a few things to note. Remember that joysticks have an interval of `-1 to 1`. Motors moves counterclockwise so you want to reverse the y direction: `double y = -gamepad1.left_stick_y;`
 
-<div style="text-align:left;">
-  $$ \text{leftMotors} = y + r \\ \text{rightMotors} = y - r $$
+<div style={{ textAlign: "left" }}>
+
+$$
+\text{leftMotors} = y + r \\
+\text{rightMotors} = y - r
+$$
+
 </div>
 
 Now in our current form, we have a differential drive/tank drive, enabling differential steering.
 
 ![Image](/assets/rotation.png)
 
-If both sticks are pushed at the same time, it will cause the robot to move in a curve\
+If both sticks are pushed at the same time, it will cause the robot to move in a curve
 
-<div style="text-align:left;">
+<div style={{ textAlign: "left" }}>
+
 $$
 \text{leftMotors} = 1 + 1 = 2 \, (\text{Clipped to } 1) \\
 \text{rightMotors} = 1 - 1 = 0
 $$
+
 </div>
 
 ![Image](/assets/curve.png)
 
 We add the final x value to enable omnidirectional movement based on the direction of the vector forces for each wheel.
 
-<div style="text-align:left;">$$ \text{frontLeftMotor} = y + x + r $$</div>
+<div style={{ textAlign: "left" }}>
+
+$$ \text{frontLeftMotor} = y + x + r $$
+
+</div>
 
 ![Image](/assets/FL.png)
 
-<div style="text-align:left;">$$ \text{backLeftMotor} = y - x + r $$</div>
+<div style={{ textAlign: "left" }}>
+
+$$ \text{backLeftMotor} = y - x + r $$
+
+</div>
 
 ![Image](/assets/BL.png)
 
-<div style="text-align:left;">$$ \text{frontRightMotor} = y - x - r $$</div>
+<div style={{ textAlign: "left" }}>
+
+$$ \text{frontRightMotor} = y - x - r $$
+
+</div>
 
 ![Image](/assets/FR.png)
 
-<div style="text-align:left;">$$ \text{backRightMotor} = y + x - r $$</div>
+<div style={{ textAlign: "left" }}>
+
+$$ \text{backRightMotor} = y + x - r $$
+
+</div>
 
 ![Image](/assets/BR.png)
 
-<div style="text-align:left;">
+<div style={{ textAlign: "left" }}>
+
 $$
 f = \text{strafe adjustment factor} = \frac{\text{track length}}{\text{track width}}
 $$
+
 </div>
 
 The strafe adjustment factor counteracts imperfect strafing caused by the difference between tracklength and trackwidth.
