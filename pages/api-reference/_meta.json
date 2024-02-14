@@ -1,0 +1,8 @@
+{
+  "linearopmode": "LinearOpMode",
+  "hardwaremap": "HardwareMap",
+  "gamepad": "Gamepad",
+  "motors": "Motors",
+  "servo": "Servos",
+  "crservo": "CRServos"
+}
