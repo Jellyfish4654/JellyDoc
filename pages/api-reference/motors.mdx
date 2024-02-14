@@ -1,0 +1,39 @@
+# Gamepad
+
+## DcMotorSimple
+
+| Type   | Method                                          | Description                                                                               |
+| ------ | ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| void   | setDirection(DcMotorSimple.Direction direction) | Sets the logical direction in which this motor operates.                                  |
+| void   | setPower(double power)                          | Sets the power level of the motor, expressed as a fraction of the maximum possible power. |
+| double | getPower()                                      | Returns the current configured power level of the motor.                                  |
+
+### Notes
+
+- The Power range of motor has an interval `[-1.0, 1.0]`.
+
+## DcMotor
+
+| Type | Method                                                            | Description                                                                                 |
+| ---- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| int  | getCurrentPosition()                                              | Returns the current reading of the encoder for this motor.                                  |
+| int  | getPortNumber()                                                   | Returns the port number on the underlying motor controller on which this motor is situated. |
+| void | setMode(DcMotor.RunMode mode)                                     | Sets the current run mode for this motor.                                                   |
+| void | setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) | Sets the current run mode for this motor.                                                   |
+
+### Notes
+
+- `DcMotor` inherits all methods from `DcMotorSimple`.
+
+### DcMotor.ZeroPowerBehavior
+
+| Type          | Method | Description                                                                        |
+| ------------- | ------ | ---------------------------------------------------------------------------------- |
+| Enum Constant | BRAKE  | Actively resisting any external force which attempts to turn the motor.            |
+| FLOAT         | FLOAT  | Any external force attempting to turn the motor is not met with active resistence. |
+
+### DcMotor.RunMode
+
+| Type          | Method                 | Description                                               |
+| ------------- | ---------------------- | --------------------------------------------------------- |
+| Enum Constant | STOP_AND_RESET_ENCODER | The motor is to set the current encoder position to zero. |

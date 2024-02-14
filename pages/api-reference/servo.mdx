@@ -1,0 +1,16 @@
+# Servo
+
+| Type   | Method                                    | Description                                                                               |
+| ------ | ----------------------------------------- | ----------------------------------------------------------------------------------------- |
+| void   | setDirection(CRServo.Direction direction) | Sets the logical direction in which this servo operates.                                  |
+| void   | setPower(double power)                    | Sets the power level of the servo, expressed as a fraction of the maximum possible servo. |
+| double | getPower()                                | Returns the current configured power level of the servo.                                  |
+
+### Notes
+
+- The position to which the servo should move, a value in the range `0.0, 1.0`/
+- `getPosition()` does NOT read a current position from the servo through any electrical means. The only way to do so is to use the axon analog wire.
+- `setDirection()` does not change the physical range of the servo.
+- If you want to move the physical range of a servo, you need to move the position of the servo horn, _build_ wise.
+- If you are trying increase the max range of a servo, from the 355 degree max, you need to use CRServo mode with the axon analog wire.
+- Servos are instructed by a digital PWM signal instead of a analog signal.

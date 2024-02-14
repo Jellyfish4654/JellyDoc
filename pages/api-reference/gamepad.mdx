@@ -1,0 +1,31 @@
+# Gamepad
+
+| Type    | Field              | Description                                                 |
+| ------- | ------------------ | ----------------------------------------------------------- |
+| boolean | x                  | button x                                                    |
+| boolean | a                  | button a                                                    |
+| boolean | b                  | button b                                                    |
+| boolean | y                  | button y                                                    |
+| boolean | dpad_down          | dpad down                                                   |
+| boolean | dpad_left          | dpad left                                                   |
+| boolean | dpad_right         | dpad right                                                  |
+| boolean | dpad_up            | dpad up                                                     |
+| boolean | left_bumper        | button left bumper                                          |
+| boolean | right_bumper       | button right bumper                                         |
+| boolean | start              | button start                                                |
+| boolean | back               | button back                                                 |
+| boolean | guide              | button guide - large button in the middle of the controller |
+| boolean | right_stick_button | right stick button                                          |
+| boolean | left_stick_button  | left stick button                                           |
+| float   | left_stick_x       | left analog stick horizontal axis                           |
+| float   | left_stick_y       | left analog stick vertical axis                             |
+| float   | right_stick_x      | right analog stick horizontal axis                          |
+| float   | right_stick_y      | right analog stick vertical axis                            |
+| float   | left_trigger       | left trigger                                                |
+| float   | right_trigger      | right trigger                                               |
+
+## Notes
+
+- Analog sticks are represented as floats that range from `-1.0 to +1.0`. They will be `0.0` while at rest.
+- Triggers are represented as floats that range from `0.0 to 1.0`. They will be at 0.0 while at rest.
+- Buttons are boolean values. Returns `true` if pressed, otherwise it returns `false.

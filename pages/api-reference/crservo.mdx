@@ -1,0 +1,12 @@
+# CRServo
+
+| Type | Method                                  | Description                                                                               |
+| ---- | --------------------------------------- | ----------------------------------------------------------------------------------------- |
+| void | setDirection(Servo.Direction direction) | Returns the current logical direction in which this servo is set as operating.            |
+| void | getPower()                              | Returns the current configured power level of the servo.                                  |
+| void | setPower(double power)                  | Sets the power level of the servo, expressed as a fraction of the maximum possible power. |
+
+### Notes
+
+- CRServos behave closer to a motor with less functions
+- Servos are instructed by a digital PWM signal instead of a analog signal. Consequently, the power needs to be explicitly set to 0 to turn off

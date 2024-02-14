@@ -1,0 +1,10 @@
+# LinearOpMode
+
+| Type    | Method          | Description                                                                           |
+| ------- | --------------- | ------------------------------------------------------------------------------------- |
+| void    | runOpMode       | Runs _once_ after you press the **INIT** button.                                      |
+| void    | waitForStart    | Pauses the OpMode until you press the **START** button.                               |
+| boolean | opModeIsActive  | Returns `isStarted()` && `!isStopRequested()`                                         |
+| boolean | opModeInInit    | Returns `!isStarted()` && `!isStopRequested()`                                        |
+| boolean | isStarted       | Returns `true` if the **START** button has been pressed, otherwise it returns `false` |
+| boolean | isStopRequested | Returns `true` if the **STOP** button has been pressed, otherwise it returns `false`  |
