@@ -26,9 +26,7 @@ r &= \text{rotational velocity} \\
 
 Let break the down to understand it
 
-\begin{align*}
-Motors = you
-\end{align*}
+$$Motors = y$$
 
 ![Image](/assets/forward_backward.png)
 
@@ -38,7 +36,7 @@ Motors moves counterclockwise so you want to reverse the y direction:\
 `double y = -gamepad1.left_stick_y;`
 
 \begin{align*}
-\text{leftMotors} = y + r \\
+\text{leftMotors} = y + r
 \text{rightMotors} = y - r
 \end{align*}
 
@@ -49,7 +47,7 @@ Now in our current form, we have a differential drive/tank drive, enabling diffe
 If both sticks are pushed at the same time, it will cause the robot to move in a curve\
 
 \begin{align*}
-\text{leftMotors} = 1 + 1 = 2 \, (\text{Clipped to } 1) \\
+\text{leftMotors} = 1 + 1 = 2 \, (\text{Clipped to } 1)
 \text{rightMotors} = 1 - 1 = 0
 \end{align*}
 
