@@ -5,4 +5,5 @@
   "motors": "Motors",
   "servo": "Servos",
   "crservo": "CRServos"
+  "telemetry": "Telemetry"
 }
