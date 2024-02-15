@@ -1,0 +1,10 @@
+#IMU
+
+| Type               | Method                                                                             | Description                                                                                           |
+|--------------------|------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| AngularVelocity    | getRobotAngularVelocity(AngleUnit angleUnit)                                       | Returns the angular veloicty of the robot                                                             |
+| Orientation        | getRobotOrientation(AxesReference reference, AxesOrder order, AngleUnit angleUnit) | Returns the current orientation relative to the position the last time `!resetYaw()`                  |
+| Quaternion         | getRobotOrientationAsQuaternion()                                                  | Returns the current orientation as a quaternion, relative to the position the last time `!resetYaw()` |
+| YawPitchRollAngles | getRobotYawPitchRollAngles()                                                       |                                                                                                       |
+| boolean            |                                                                                    |                                                                                                       |
+| void               | resetYaw()                                                                         | Resets the way angle of the robot to 0                                                                |
