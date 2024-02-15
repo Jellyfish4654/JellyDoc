@@ -1,0 +1,17 @@
+#Telemetry
+
+| Type           | Method                                              | Description                                                                                                        |
+|----------------|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Telemetry.Item | addData(String caption, Object value)               | Adds an item to the receiver to be displayed on the driver station                                                 |
+| Object         | addAction(Action)                                   | Adds an action to the receiver to be displayed                                                                     |
+| Telemetry.Line | addLine()                                           | Creates a a new line in the receiver Telemetry                                                                     |
+| void           | clear()                                             | Removes all items from the receiver Telemetry that are not set to be retained                                      |
+| void           | clearAll()                                          | Removes all items, lines, and actions from the receiver Telemetry                                                  |
+| void           | setAutoClear()                                      | Sets whether `!clear()` is called after each call to `!update()`                                                   |
+| boolean        | isAutoClear()                                       | Returns `true` if `!clear()` is automatically called after each `!update()`                                        |
+| boolean        | removeAction(Object token)                          | Removes a previously added action from the receiver; returns `true` if an action was removed and `false` otherwise |
+| boolean        | removeItem(Telemetry.Item item)                     | Removes a previously added item from the receiver; returns `true` if an item was removed and `false` otherwise     |
+| boolean        | removeLine(Telemetry.Line line)                     | Removes a previously added line from the receiver; returns `true` if an line was removed and `false` otherwise     |
+| void           | setMsTransmissionInterval(int transmissionInterval) | Sets the minimum interval between Telemetry updates to the driver station                                          |
+| boolean        | update()                                            | Sends receiver Telemetry to the driver station                                                                     |
+| Telemetry.Log  | log()                                               | Returns the log of this Telemetry    
