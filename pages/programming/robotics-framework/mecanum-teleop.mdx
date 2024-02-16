@@ -136,19 +136,3 @@ With our current setup, the joystick controls the direction of the robot relativ
     allowfullscreen
   ></iframe>
 </div>
-
-To achieve this, the x/y components of the joysticks are rotated counter to the robot’s angle. We get the robot's heading (angle) from the IMU. The IMU is a sensor inside of the control hub which returns the pitch, yaw, and heading of the robot.
-
-Formula for Rotating a Vector:
-
-$$
-x_2 = \cos \beta x_1 - \sin \beta y_1 \\
-y_2 = \sin \beta x_1 + \cos \beta y_1
-$$
-
-<Callout type="info" emoji="ℹ️">
-  Proof of this formula can be found
-  [here](https://matthew-brett.github.io/teaching/rotation_2d.html).
-</Callout>
-
-The translation joystick values need to be counterrotated by the robot heading. The IMU returns heading, however we need to rotate the movement counter to the robot’s rotation, so its negative is taken.
