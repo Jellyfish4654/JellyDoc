@@ -7,8 +7,8 @@
 | Telemetry.Line | addLine()                                           | Creates a a new line in the receiver Telemetry                                                                     |
 | void           | clear()                                             | Removes all items from the receiver Telemetry that are not set to be retained                                      |
 | void           | clearAll()                                          | Removes all items, lines, and actions from the receiver Telemetry                                                  |
-| void           | setAutoClear()                                      | Sets whether `!clear()` is called after each call to `!update()`                                                   |
-| boolean        | isAutoClear()                                       | Returns `true` if `!clear()` is automatically called after each `!update()`                                        |
+| void           | setAutoClear()                                      | Sets whether `clear()` is called after each call to `update()`                                                   |
+| boolean        | isAutoClear()                                       | Returns `true` if `clear()` is automatically called after each `update()`                                        |
 | boolean        | removeAction(Object token)                          | Removes a previously added action from the receiver; returns `true` if an action was removed and `false` otherwise |
 | boolean        | removeItem(Telemetry.Item item)                     | Removes a previously added item from the receiver; returns `true` if an item was removed and `false` otherwise     |
 | boolean        | removeLine(Telemetry.Line line)                     | Removes a previously added line from the receiver; returns `true` if an line was removed and `false` otherwise     |

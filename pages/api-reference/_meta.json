@@ -4,6 +4,6 @@
   "gamepad": "Gamepad",
   "motors": "Motors",
   "servo": "Servos",
-  "crservo": "CRServos"
+  "crservo": "CRServos",
   "telemetry": "Telemetry"
 }
