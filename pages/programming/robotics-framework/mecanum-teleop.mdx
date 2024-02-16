@@ -27,9 +27,11 @@ $$
 
 ## Deriving Mecanum Wheel Control
 
-Let break the down to understand it
+Let break the down to understand it:
 
-$$ Motors = y $$
+$$
+Motors = y
+$$
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   ![Image](/assets/forward_backward.png)
@@ -61,25 +63,33 @@ $$
 
 We add the final x value to enable omnidirectional movement based on the direction of the vector forces for each wheel.
 
-$$ \text{frontLeftMotor} = y + x + r $$
+$$
+\text{frontLeftMotor} = y + x + r
+$$
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   ![Image](/assets/FL.png)
 </div>
 
-$$ \text{backLeftMotor} = y - x + r $$
+$$
+\text{backLeftMotor} = y - x + r
+$$
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   ![Image](/assets/BL.png)
 </div>
 
-$$ \text{frontRightMotor} = y - x - r $$
+$$
+\text{frontRightMotor} = y - x - r
+$$
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   ![Image](/assets/FR.png)
 </div>
 
-$$ \text{backRightMotor} = y + x - r $$
+$$
+\text{backRightMotor} = y + x - r
+$$
 
 <div style={{ display: "flex", justifyContent: "center" }}>
 ![Image](/assets/BR.png)
