@@ -111,28 +111,41 @@ The SDK simply clips to the range `-1 to 1`. This causes us to lose the ratio be
 
 With our current setup, the joystick controls the direction of the robot relative to the frame of the robot. One common driver enhancement is field centric driving, where to robot joystick controls the direction of the robot relative field/driver rather than the frame of the robot.
 
-<style jsx>{`
-  .video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-  }
-
-  .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-`}</style>
-
-<div className="video-wrapper">
+<div
+  style={{
+    position: "relative",
+    paddingBottom: "56.25%",
+    height: 0,
+    overflow: "hidden",
+  }}
+>
   <iframe
     src="https://www.youtube.com/embed/ZEDIpZWOT1Y"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
+    frameBorder="0"
+    style={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      width: "85%",
+      height: "85%",
+      transform: "translate(-50%, -50%)", // Centering it both horizontally and vertically
+    }}
+    allowFullScreen
   ></iframe>
 </div>
+
+To achieve this, the x/y components of the joysticks are rotated counter to the robot’s angle. We get the robot's heading (angle) from the IMU. The IMU is a sensor inside of the control hub which returns the pitch, yaw, and heading of the robot.
+
+Formula for Rotating a Vector:
+
+$$
+x_2 = \cos \beta x_1 - \sin \beta y_1 \\
+y_2 = \sin \beta x_1 + \cos \beta y_1
+$$
+
+<Callout type="info" emoji="ℹ️">
+  Proof of this formula can be found
+  [here](https://matthew-brett.github.io/teaching/rotation_2d.html).
+</Callout>
+
+The translation joystick values need to be counterrotated by the robot heading. The IMU returns heading, however we need to rotate the movement counter to the robot’s rotation, so its negative is taken.
