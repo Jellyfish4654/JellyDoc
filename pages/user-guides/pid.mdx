@@ -55,9 +55,9 @@ Where:
 
 <Callout type="warning" emoji="⚠️">
   The integral term is almost never used in FTC PID control loops. Correctly
-  tuning the :math:`K_p` and :math:`K_d` should be to prevent overshoot for
-  99.99% of applications. Adding an integral term still works, however, it is
-  only more tuning to achieve the same result.
+  tuning the Kp and Kd should be to prevent overshoot for 99.99% of
+  applications. Adding an integral term still works, however, it is only more
+  tuning to achieve the same result.
 </Callout>
 
 ## Pseudocode Implementation of PID
@@ -86,17 +86,17 @@ while True:
 
 ## Tuning a PID Loop
 
-1. Set :math:`K_p`, :math:`K_i`, and :math:`K_d` to zero.
-2. increase :math:`K_p` until until the output starts to oscillate around the target position.
+1. Set Kp, Ki, and Kd to zero.
+2. increase Kp until until the output starts to oscillate around the target position.
 3. Increase Kd as much as possible without introducing jittering in the system response.
 
 ## Effects of increasing a parameter independently
 
-| Parameter   | Rise time    | Overshoot | Settling time | Stability                    |
-| ----------- | ------------ | --------- | ------------- | ---------------------------- |
-| :math:`K_p` | Decrease     | Increase  | Small change  | Degrade                      |
-| :math:`K_i` | Decrease     | Increase  | Increase      | Degrade                      |
-| :math:`K_d` | Minor change | Decrease  | Decrease      | Improve if :math:`K_d` small |
+| Parameter | Rise time    | Overshoot | Settling time | Stability           |
+| --------- | ------------ | --------- | ------------- | ------------------- |
+| Kp        | Decrease     | Increase  | Small change  | Degrade             |
+| Ki        | Decrease     | Increase  | Increase      | Degrade             |
+| Kd        | Minor change | Decrease  | Decrease      | Improve if Kd small |
 
 ## PID Controller Sample Rate
 
