@@ -1,0 +1,143 @@
+import { Callout } from "nextra/components";
+
+# PID Controller
+
+## Closed Loop System
+
+A closed-loop control system/feedback control system, utilizes a controller/algorithm to adjust the system's _input_ based on its observed output. In other words, a closed-loop system employs feedback from the system's output to fine-tune its input, ensuring the system achieves and maintains the desired outcome.
+
+## PID
+
+A PID controller stands for Proportional-Integral-Derivative controller and is one of the most commonly used feedback controllers. A PID controller continuously calculates an error value as the difference between a desired setpoint and a measured process variable.The controller outputs a control signal that determined by a weighted sum of the proportional, integral, and derivative terms. The controller aims to minimize the error over time, providing precise and responsive control.
+
+## Gain
+
+Gain is a proportional value that shows the relationship between the magnitude of the input to the magnitude of the output signal at steady state. In other words, gain is a multiplier that determines mutliplier of a system. We _tune_ the gain coefficient to provide more/less power to the system in order to maintain the controller's stability and achieve our desired outcome between the velocity, acceleration, and position of our system.
+
+### Proportional Term
+
+The Proportional term is the most essential part of the PID Controller. It drives the position error closest to zero. The proportional term provides an output value that is directly proportional to the current error.
+
+$$
+P(t) = K_p \times e(t)
+$$
+
+Where:
+
+- $K_p$ is the proportional gain.
+- $e(t)$ is the current error
+
+### Derivative Term
+
+The Derivative term drives the velocity error to zero. This term predicts the trend of the error by evaluating its rate of change, acting to _dampen_ the system response and prevent overshooting.
+
+$$
+D(t) = K_d \times \frac{de(t)}{dt}
+$$
+
+Where:
+
+- $K_d$ is the derivative gain.
+- $\frac{de(t)}{dt}$ is the rate of change of the error.
+
+### Integral Term
+
+The Integral term accumulates the sum of past errors. In other words, it's the integral of the error with respect to time. The steady-state error is the difference between the desired final output and the actual one, indicating an error that has persisted over time. The integral term eliminates the residual steady-state error that occurs within a controller.
+
+$$
+I(t) = K_i \times \int e(t) \, dt
+$$
+
+Where:
+
+- $K_i$ is the integral gain.
+- $\int e(t) \, dt$ is the integral of the error over time.
+
+<Callout type="warning" emoji="⚠️">
+  The integral term is almost never used in FTC PID control loops. Correctly
+  tuning the :math:`K_p` and :math:`K_d` should be to prevent overshoot for
+  99.99% of applications. Adding an integral term still works, however, it is
+  only more tuning to achieve the same result.
+</Callout>
+
+## Pseudocode Implementation of PID
+
+```java
+while True:
+   currentTime = geCurrentTime()
+   currentError = targetPosition-currentPosition
+
+   p = Kp * currentError
+
+   i += Ki * (currentError * (currentTime - previousTime))
+
+   if (i > max_i)
+       i = max_i
+   else if (i < -max_i)
+       i = -max_i
+
+   d = Kd * (currentError - previousError) / (currentTime - previousTime)
+
+   output = p + i + d
+
+   previousError = currentError
+   previousTime = currentTime
+```
+
+## Tuning a PID Loop
+
+1. Set :math:`K_p`, :math:`K_i`, and :math:`K_d` to zero.
+2. increase :math:`K_p` until until the output starts to oscillate around the target position.
+3. Increase Kd as much as possible without introducing jittering in the system response.
+
+## Effects of increasing a parameter independently
+
+| Parameter   | Rise time    | Overshoot | Settling time | Stability                    |
+| ----------- | ------------ | --------- | ------------- | ---------------------------- |
+| :math:`K_p` | Decrease     | Increase  | Small change  | Degrade                      |
+| :math:`K_i` | Decrease     | Increase  | Increase      | Degrade                      |
+| :math:`K_d` | Minor change | Decrease  | Decrease      | Improve if :math:`K_d` small |
+
+## PID Controller Sample Rate
+
+To achieve most performance out of their PID controller, it is essential to consider the Sample rate of the controller. The Sample rate is when the controller updates its output given new sensor data. Higher Sample rates allow for more stable control and allow for the usage of more significant PID coefficients to reduce settling time. Therefore, it is important using techniques to make loop times as fast as possible.
+
+## FTCLib PID Controller
+
+FTCLib implements methods for PID Control.
+
+```java
+    private double P = 0.05;
+    private double I = 0;
+    private double D = 0.0002;
+    private double pidOutput;
+    private int targetPosition;
+
+    public Intake(DcMotorEx Motor) {
+        this.Motor = Motor;
+        // Initialize the PID controller with PID coefficients
+        this.intakeController = new PIDController(P, I, D);
+    }
+
+    // Method to update the PID Controller
+    public void update() {
+        control(targetPosition);
+    }
+
+    // Method to control the motor using PID
+    private void control(double targetPosition) {
+        // Get the current position of the motor
+        int currentPosition = Motor.getCurrentPosition();
+        // Calculate PID output based on current and target positions
+        pidOutput = intakeController.calculate(currentPosition, targetPosition);
+        // Set the motor power to the PID output, with a minimum threshold to overcome stiction
+        if (Math.abs(pidOutput) > 0.05) {
+            Motor.setPower(pidOutput);
+        }
+    }
+
+    // Method to set a new target position for the motor
+    public void setTargetPosition(int newPosition) {
+        this.targetPosition = newPosition;
+    }
+```
