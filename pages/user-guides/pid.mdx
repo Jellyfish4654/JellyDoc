@@ -10,6 +10,8 @@ A closed-loop control system/feedback control system, utilizes a controller/algo
 
 A PID controller stands for Proportional-Integral-Derivative controller and is one of the most commonly used feedback controllers. A PID controller continuously calculates an error value as the difference between a desired setpoint and a measured process variable.The controller outputs a control signal that determined by a weighted sum of the proportional, integral, and derivative terms. The controller aims to minimize the error over time, providing precise and responsive control.
 
+![Image](/assets/ftc_pid.png)
+
 ## Gain
 
 Gain is a proportional value that shows the relationship between the magnitude of the input to the magnitude of the output signal at steady state. In other words, gain is a multiplier that determines mutliplier of a system. We _tune_ the gain coefficient to provide more/less power to the system in order to maintain the controller's stability and achieve our desired outcome between the velocity, acceleration, and position of our system.
@@ -97,6 +99,8 @@ while True:
 | Kp        | Decrease     | Increase  | Small change  | Degrade             |
 | Ki        | Decrease     | Increase  | Increase      | Degrade             |
 | Kd        | Minor change | Decrease  | Decrease      | Improve if Kd small |
+
+![Image](/assets/pid_gif.png)
 
 ## PID Controller Sample Rate
 
