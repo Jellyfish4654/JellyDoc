@@ -1,5 +1,6 @@
 {
   "reading-hardware": "Reading Hardware",
+  "linearopmode": "OpMode",
   "mecanum-teleop": "Mecanum TeleOp",
   "pid" : "PID Controller"
 }

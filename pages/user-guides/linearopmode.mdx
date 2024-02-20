@@ -1,0 +1,70 @@
+# OpMode
+
+The term OpMode is short for Operational Mode. It is the code that controls what the robot does. There are different types of OpModes for various phases of an FTC match. Autonomous where the robot acts on pre-programmed instructions without human input. TeleOp periods where the robot is controlled by drivers using gamepads.
+
+![Image](/assets/opmode.png)
+
+There are two phases: the initialization phase and the start phase. The initialization phase is used for setting up any variables or initializing hardware components that the robot will need to use. The start phase is where the main logic of the OpMode is executed. This is the phase where the robot will perform its tasks autonomously or under the control of the driver.
+
+## LinearOpMode vs OpMode
+
+There are technically two types of OpMode classes, `LinearOpMode` and `OpMode`. `OpMode` is "more modular" given that it is broken up into five different methods where you write your code. On the otherhand `LinearOpMode` is organized under a single method, providing a linear control flow, which can be easier to follow and debug. `LinearOpMode` is easier to use and is used by 99% of teams. Basically all sample code online is also written in LinearOpMode.
+
+## LinearOpMode Structure
+
+```java
+@TeleOp(name = "LinearTeleop", group = "OpMode")
+public class LinearTeleop extends LinearOpMode{
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+        waitForStart();
+        while(opModeIsActive()){
+
+        }
+    }
+}
+```
+
+## Breaking Down LinearOpMode
+
+```java
+@TeleOp()
+```
+
+This annotation makes your OpMode appear on the driver station to select from. You can choose from `@Teleop()` or `@Autonomous()`. You can optionally give it a name and a group. If not, it will use your class name as the name.
+@TeleOp(name = "ExampleName", group = "ExampleGroup")
+
+```java
+public class LinearTeleop extends LinearOpMode {
+    // Declarations
+```
+
+Variables and objects are declared here
+
+```java
+ public void runOpMode() throws InterruptedException {
+    // Initialize Hardware/Variables
+```
+
+This is the start of our `runOpMode()` method where we initialize our objects and variables. We can also move things like servos here, as long as our robot doesnt not extend out of the 18 inch limit such as closing a claw to grab a game element.
+We can also add an init loop like this:
+
+```java
+while (!isStarted() && !isStopRequested()) {
+    // Init loop code
+}
+```
+
+This is commonly used for vision during auto to detect objects.
+
+After `waitForStart()`, we can also add anything we may want to run once immediately after we hit START such as a servo.
+
+```java
+while(opModeIsActive()){
+    // Main loop
+}
+```
+
+The `opModeIsActive()` loop is the main loop where the robot is operated.
