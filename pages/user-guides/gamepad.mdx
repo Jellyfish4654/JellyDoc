@@ -1,0 +1,46 @@
+import { Callout } from "nextra/components";
+
+# Gamepad
+
+There are two gamepads/drivers, `gamepad1` and `gamepad2`. We designate gamepad1`to the driver and`gamepad2` to subsystems.
+
+## Gamepad Usage
+
+```java
+if (gamepad1.a) {
+    servo.setPosition(servo.getPosition()+0.1);
+}
+else if (gamepad1.b) {
+    servo.setPosition(servo.getPosition()-0.1);
+}
+```
+
+Handling boolean simply involves putting the gamepad boolean under an if statement inside the main loop. Note that the methods inside the if statement will continously run while the button is being held down, unless we use a rising edge detector.
+
+```java
+double y = -gamepad1.left_stick_y;
+motor.setPower(y);
+```
+
+Float inputs are directly set to control hardware.
+
+## Rising Edge Detector
+
+A commonly used technique is a rising edge detector. It allows code to be run only once upon the initial button press rather than continuously while the button is held down. It verifies the button was not pressed in the previous loop but is pressed currently.
+
+```java
+// Usage
+if (currentGamepad1.a && !previousGamepad1.a) {
+    servo.setPosition(servo.getPosition() + 0.1);
+}
+
+// Rising Edge Detector method
+public boolean risingEdgeDetect(boolean current, boolean previous) {
+    return current && !previous;
+}
+```
+
+<Callout type="info" emoji="ℹ️">
+  This is easily achieved through
+  [FTCLib](https://docs.ftclib.org/ftclib/v/v2.0.0/features/gamepad-extensions#buttonreader).
+</Callout>
