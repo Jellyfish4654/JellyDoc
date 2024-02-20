@@ -1,0 +1,21 @@
+# Reading Hardware
+
+The first thing to reading/writing hardware is to create and initalize hardware objects.
+
+```java
+`DcMotor` exampleMotor;
+```
+
+To use the object, you need to import the class of the object from the SDK. The `DcMotor` class is imported to properly create the motor object under this example.
+
+To instantiate objects, the special HardwareMap object from the FTC SDK to used rather than calling a constructor directly. The HardwareMap retrieves the hardware from the configuration on the Robot Controller with the indicated name with its indicated class/interface.
+
+```java
+exampleMotor = hardwareMap.get(DcMotor.class, "Example Motor");
+```
+
+`get(Class, String deviceName)`
+
+In the first paramter, you pass the class of the sensor. In the second paramter, you pass the name you assigned in the Robot Controller configuration. `hardwareMap` will find the port the hardware is plugged into, allowing it to be accessed.
+
+![Image](/assets/hardwaremap.png)

@@ -1,4 +1,5 @@
 {
+  "reading-hardware": "Reading Hardware",
   "mecanum-teleop": "Mecanum TeleOp",
   "pid" : "PID Controller"
 }
